@@ -20,9 +20,12 @@ public class LoadingDialogManager {
         }
         return manager;
     }
-    public synchronized void showLoading(FragmentManager fm) {
+    public synchronized void showLoading(FragmentManager fm){
+        showLoading(fm,"loading...");
+    }
+    public synchronized void showLoading(FragmentManager fm,String message) {
         if(null == loadingDialog){
-            loadingDialog = LoadingDialog.newInstance();
+            loadingDialog = LoadingDialog.newInstance(message);
         }else{
             loadingDialog.dismiss();
         }
