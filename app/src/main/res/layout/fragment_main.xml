@@ -35,4 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/jump_to_image"/>
+    <Button
+        android:id="@+id/jump_to_tab"
+        android:text="跳转到TabActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/jump_to_indicator"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,8 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     Button jumpToImage;
     @BindView(R.id.jump_to_indicator)
     Button jumpToIndicator;
+    @BindView(R.id.jump_to_tab)
+    Button jumpToTab;
 
     @Override
     public int getLayoutId() {
@@ -50,7 +52,6 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     }
 
 
-
     @Override
     public boolean hasToolbar() {
         return false;
@@ -63,7 +64,7 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
 
     @OnClick(R.id.send_msg_btn)
     public void onViewClicked() {
-        EventBusUtil.post(new EventMessage(2,"sddfsdf"));
+        EventBusUtil.post(new EventMessage(2, "sddfsdf"));
     }
 
     @Override
@@ -79,20 +80,21 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     }
 
     private static final String TAG = "MainFragment";
+
     @Override
     public void showMessage(@NonNull String message) {
-        Log.e(TAG, "showMessage: "+message);
+        Log.e(TAG, "showMessage: " + message);
     }
 
     @Override
-    public  void showLoading() {
+    public void showLoading() {
 
-        LoadingDialogManager.getInstance().showLoading(getActivity().getSupportFragmentManager()                                                                                                                                                                                                                                                                                                                                                                                                                      );
+        LoadingDialogManager.getInstance().showLoading(getActivity().getSupportFragmentManager());
 
     }
 
     @Override
-    public  void hideLoading() {
+    public void hideLoading() {
         LoadingDialogManager.getInstance().hideLoading();
     }
 
@@ -110,11 +112,16 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.jump_to_image)
     public void jumpToImage() {
         CommonUtils.startActivity(ImageLoaderActivity.class);
-        EventBusUtil.postSticky(new EventMessage(1,"sticky"));
+        EventBusUtil.postSticky(new EventMessage(1, "sticky"));
     }
 
     @OnClick(R.id.jump_to_indicator)
     public void jumpToIndicator() {
         CommonUtils.startActivity(IndicatorActivity.class);
+    }
+
+    @OnClick(R.id.jump_to_tab)
+    public void jumpToTab() {
+        CommonUtils.startActivity(TabActivity.class);
     }
 }
