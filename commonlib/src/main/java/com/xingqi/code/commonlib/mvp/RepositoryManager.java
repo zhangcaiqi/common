@@ -1,5 +1,8 @@
 package com.xingqi.code.commonlib.mvp;
 
+import com.xingqi.code.commonlib.base.BaseApplication;
+import com.xingqi.code.commonlib.config.GlobalConfig;
+
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +30,7 @@ public class RepositoryManager implements IRepositoryManager {
         }else{
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
+                    .client(BaseApplication.getOkHttpClient())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
