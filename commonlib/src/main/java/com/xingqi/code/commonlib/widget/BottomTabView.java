@@ -1,6 +1,7 @@
 package com.xingqi.code.commonlib.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.xingqi.code.commonlib.R;
+import com.xingqi.code.commonlib.base.BaseActivity;
 import com.xingqi.code.commonlib.utils.ScreenUtil;
 
 public class BottomTabView extends RelativeLayout implements View.OnClickListener{
@@ -24,6 +27,9 @@ public class BottomTabView extends RelativeLayout implements View.OnClickListene
 
     public BottomTabView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs,R.styleable.BottomTabView);
+        backgroundColor = typedArray.getColor(R.styleable.BottomTabView_backgroundColor, backgroundColor);
+        tabLayoutHeight = typedArray.getDimensionPixelSize(R.styleable.BottomTabView_tabLayoutHeight,tabLayoutHeight);
 
     }
 
@@ -42,7 +48,7 @@ public class BottomTabView extends RelativeLayout implements View.OnClickListene
         linearLayout.setClipChildren(false);
 
         linearLayout.setId(tabLayoutId.hashCode());
-        addView(linearLayout,LayoutParams.MATCH_PARENT,ScreenUtil.dip2px(getContext(),tabLayoutHeight));
+        addView(linearLayout,LayoutParams.MATCH_PARENT,tabLayoutHeight);
     }
 
     public BottomTabView addTab(Tab tab){

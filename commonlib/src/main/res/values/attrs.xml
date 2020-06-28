@@ -27,4 +27,8 @@
         <attr name="textSizeRatio" format="float"/>
         <attr name="tabWidth" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="BottomTabView">
+        <attr name="backgroundColor" format="color"/>
+        <attr name="tabLayoutHeight" format="dimension"/>
+    </declare-styleable>
 </resources>
