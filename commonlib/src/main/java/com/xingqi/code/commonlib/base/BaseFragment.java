@@ -72,8 +72,12 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPresenter = initPresenter();
-        initData();
 
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
     }
     protected abstract P initPresenter();
     @Override
