@@ -46,7 +46,9 @@ public class FragmentDelegateImpl implements FragmentDelegate {
                 .setToolbarColor(iFragment.toolbarColor())
                 .setListener((v -> {iFragment.onNavigateClick();}))
                 .build();
-        iAppStyle.setAppBarStyle();
+        if(iFragment.isSetAppBarStyle()){
+            iAppStyle.setAppBarStyle();
+        }
         if (iFragment.registerEventBus()) {
             EventBusUtil.register(fragment);
         }
@@ -55,6 +57,9 @@ public class FragmentDelegateImpl implements FragmentDelegate {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         unbinder = ButterKnife.bind(fragment, view);
+        if(null != iFragment){
+            iFragment.initData();
+        }
     }
 
     @Override

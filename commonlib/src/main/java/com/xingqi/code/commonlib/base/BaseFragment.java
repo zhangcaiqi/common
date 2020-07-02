@@ -77,7 +77,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
     }
     protected abstract P initPresenter();
     @Override
