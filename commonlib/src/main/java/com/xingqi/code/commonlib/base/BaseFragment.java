@@ -125,4 +125,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public boolean isCustomToolbar() {
         return false;
     }
+
+    @Override
+    public boolean isSetAppBarStyle() {
+        return false;
+    }
 }
