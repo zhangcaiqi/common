@@ -74,10 +74,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         mPresenter = initPresenter();
 
     }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+
     protected abstract P initPresenter();
     @Override
     public void onDestroy() {
@@ -123,5 +120,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public final Subject<FragmentEvent> provideLifecycleSubject() {
         return mLifecycleSubject;
+    }
+    @Override
+    public boolean isCustomToolbar() {
+        return false;
     }
 }

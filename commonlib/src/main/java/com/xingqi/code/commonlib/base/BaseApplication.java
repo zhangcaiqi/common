@@ -1,10 +1,12 @@
 package com.xingqi.code.commonlib.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.xingqi.code.commonlib.config.GlobalConfig;
@@ -130,5 +132,16 @@ public abstract class BaseApplication extends Application {
         return RequestInterceptor.Level.ALL;
     }
     protected abstract GlobalHttpHandler providerGlobalHttpHandler();
-
+    public static boolean isAppSelfPage(Activity activity){
+        if(activity instanceof IPage){
+            return true;
+        }
+        return false;
+    }
+    public static boolean isAppSelfPage(Fragment fragment){
+        if(fragment instanceof IPage){
+            return true;
+        }
+        return false;
+    }
 }

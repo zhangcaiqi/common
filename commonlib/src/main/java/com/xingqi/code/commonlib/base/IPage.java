@@ -32,4 +32,6 @@ public interface IPage {
     void disposable();
 
     Context getOwnContext();
+
+    boolean isCustomToolbar();
 }
