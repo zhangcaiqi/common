@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:textColorSelect="@color/colorPrimaryDark"
         app:layout_constraintTop_toTopOf="parent">
 
     </com.xingqi.code.commonlib.widget.ViewPagerIndicator>

@@ -19,6 +19,7 @@
         <attr name="indicatorColor" format="color"/>
         <attr name="visibleCount" format="integer"/>
         <attr name="textColor" format="color"/>
+        <attr name="textColorSelect" format="color"/>
         <attr name="textSize" format="dimension"/>
 
         <attr name="indicatorHeight" format="dimension"/>

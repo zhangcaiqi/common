@@ -31,6 +31,8 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
     private int indicatorColor = Color.BLACK;
     //tab标题文字颜色
     private int textColor = Color.BLACK;
+    //tab标题选中文字大小
+    private int textColorSelect = Color.BLACK;
     //tab标题文字大小
     private int textSize = 12;
     //tab标题放大比例
@@ -77,6 +79,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
             indicatorColor = typedArray.getColor(R.styleable.ViewPagerIndicator_indicatorColor,indicatorColor);
             mVisibleCount = typedArray.getInt(R.styleable.ViewPagerIndicator_visibleCount,mVisibleCount);
             textColor = typedArray.getColor(R.styleable.ViewPagerIndicator_textColor,textColor);
+            textColorSelect = typedArray.getColor(R.styleable.ViewPagerIndicator_textColorSelect,textColorSelect);
             indicatorHeight = typedArray.getDimensionPixelOffset(R.styleable.ViewPagerIndicator_indicatorHeight,indicatorHeight);
             indicatorSpacing = typedArray.getDimensionPixelOffset(R.styleable.ViewPagerIndicator_indicatorSpacing,indicatorSpacing);
             minWidthRatio = typedArray.getFloat(R.styleable.ViewPagerIndicator_minWidthRatio,minWidthRatio);
@@ -228,10 +231,14 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
                 next.setTextSize(nextSize);
                 if(positionOffset > 0.5){
                     next.setTypeface(null, Typeface.BOLD);
+                    next.setTextColor(textColorSelect);
                     current.setTypeface(null,Typeface.NORMAL);
+                    current.setTextColor(textColor);
                 }else{
                     current.setTypeface(null, Typeface.BOLD);
+                    current.setTextColor(textColorSelect);
                     next.setTypeface(null,Typeface.NORMAL);
+                    next.setTextColor(textColor);
                 }
             }else{//向右滑动
                 TextView previous = (TextView) getChildAt(selectedPosition-1);
@@ -241,16 +248,21 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
                 previous.setTextSize(previousSize);
                 if(positionOffset < 0.5){
                     previous.setTypeface(null, Typeface.BOLD);
+                    previous.setTextColor(textColorSelect);
                     current.setTypeface(null,Typeface.NORMAL);
+                    current.setTextColor(textColor);
                 }else{
                     current.setTypeface(null, Typeface.BOLD);
+                    current.setTextColor(textColorSelect);
                     previous.setTypeface(null,Typeface.NORMAL);
+                    previous.setTextColor(textColor);
                 }
             }
         }else{
             //选中时
             current.setTextSize(selectedSize);
             current.setTypeface(null, Typeface.BOLD);
+            current.setTextColor(textColorSelect);
         }
 
 
