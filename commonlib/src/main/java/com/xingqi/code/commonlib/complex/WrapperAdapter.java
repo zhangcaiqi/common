@@ -28,7 +28,7 @@ public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         FooterItemCreator footerItemCreator = findFooter(viewType);
         if(null != footerItemCreator){
-            footerItemCreator.onCreateViewHolder(parent,viewType);
+            return footerItemCreator.onCreateViewHolder(parent,viewType);
         }
         return realAdapter.onCreateViewHolder(parent,viewType);
     }

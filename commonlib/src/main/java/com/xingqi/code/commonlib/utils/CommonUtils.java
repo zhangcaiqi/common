@@ -267,7 +267,7 @@ public class CommonUtils {
         AppManager.getAppManager().startActivity(activityClass);
     }
 
-    public void startActivity(Class<?> activityClass, Bundle bundle){
+    public static void startActivity(Class<?> activityClass, Bundle bundle){
         AppManager.getAppManager().startActivity(activityClass,bundle);
     }
     /**

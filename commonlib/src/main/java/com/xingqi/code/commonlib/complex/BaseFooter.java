@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.xingqi.code.commonlib.base.BaseApplication;
 
 public abstract class BaseFooter implements FooterItemCreator<ViewHolder> {
-    private Context context;
+    protected Context context;
 
     public BaseFooter(Context context) {
         this.context = context;

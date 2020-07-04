@@ -189,7 +189,7 @@ public class RecyclerPaginate extends Paginate{
     public void setHasMoreDataToLoad(boolean hasMoreDataToLoad) {
         if (wrapperAdapter != null) {
             wrapperAdapter.displayLoadingRow(hasMoreDataToLoad);
-            wrapperAdapter.displayNoMoreRow(!hasMoreDataToLoad);
+            wrapperAdapter.displayNoMoreRow(hasMoreDataToLoad);
         }
     }
 

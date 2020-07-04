@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.xingqi.code.commonlib.base.BaseApplication;
 
 public abstract class BaseHeader implements HeaderItemCreator<ViewHolder> {
-    private Context context;
+    protected Context context;
 
     public BaseHeader(Context context) {
         this.context = context;
