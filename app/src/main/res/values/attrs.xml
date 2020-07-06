@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Option">
+        <attr name="titleLeftMargin" format="dimension"/>
+        <attr name="title" format="string"/>
+        <attr name="subTitle" format="string"/>
+        <attr name="optionValue" format="string"/>
+        <attr name="underLineColor" format="color"/>
+        <attr name="leftIcon" format="reference"/>
+        <attr name="rightIcon" format="reference"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvp.ui.OptionActivity"
+    android:fitsSystemWindows="true">
+
+    <com.xingqi.code.common.widget.Option
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:leftIcon="@drawable/option_title_icon"
+        app:title="张三"
+        app:subTitle="党政办公室"
+        app:rightIcon="@drawable/right_arrow"
+        app:optionValue="9999"
+        />
+</LinearLayout>

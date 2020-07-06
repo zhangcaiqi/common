@@ -34,6 +34,8 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     Button jumpToIndicator;
     @BindView(R.id.jump_to_tab)
     Button jumpToTab;
+    @BindView(R.id.jump_to_option)
+    Button jumpToOption;
 
     @Override
     public int getLayoutId() {
@@ -123,5 +125,10 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.jump_to_tab)
     public void jumpToTab() {
         CommonUtils.startActivity(TabActivity.class);
+    }
+
+    @OnClick(R.id.jump_to_option)
+    public void jumpToOption() {
+        CommonUtils.startActivity(OptionActivity.class);
     }
 }
