@@ -284,12 +284,21 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
         this.position = position;
         this.positionOffset = 0f;
         this.selectedPosition = position;
+        unSelectChildren();
         invalidate();
         if(null != pageChangeListener){
             pageChangeListener.onPageSelected(position);
         }
     }
-
+    private void unSelectChildren(){
+        int count = getChildCount();
+        for(int i=0;i<count;i++){
+            TextView textView = (TextView) getChildAt(i);
+            textView.setTextSize(textSize);
+            textView.setTypeface(null, Typeface.NORMAL);
+            textView.setTextColor(textColor);
+        }
+    }
     @Override
     public void onPageScrollStateChanged(int state) {
         if(null != pageChangeListener){

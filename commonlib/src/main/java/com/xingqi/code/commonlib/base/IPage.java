@@ -33,5 +33,4 @@ public interface IPage {
 
     Context getOwnContext();
 
-    boolean isCustomToolbar();
 }

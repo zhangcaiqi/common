@@ -121,10 +121,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public final Subject<FragmentEvent> provideLifecycleSubject() {
         return mLifecycleSubject;
     }
-    @Override
-    public boolean isCustomToolbar() {
-        return false;
-    }
 
     @Override
     public boolean isSetAppBarStyle() {

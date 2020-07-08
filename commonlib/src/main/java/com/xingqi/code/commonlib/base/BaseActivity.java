@@ -168,8 +168,4 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         return mLifecycleSubject;
     }
 
-    @Override
-    public boolean isCustomToolbar() {
-        return true;
-    }
 }
