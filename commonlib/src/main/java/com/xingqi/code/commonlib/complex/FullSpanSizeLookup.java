@@ -7,27 +7,26 @@ import androidx.recyclerview.widget.GridLayoutManager;
 class FullSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
     private final GridLayoutManager.SpanSizeLookup wrappedSpanSizeLookup;
-    private final WrapperAdapter wrapperAdapter;
+    private final ComplexAdapter complexAdapter;
     private final GridLayoutManager gridLayoutManager;
 
-    public FullSpanSizeLookup(WrapperAdapter wrapperAdapter, GridLayoutManager gridLayoutManager) {
-        this.wrapperAdapter = wrapperAdapter;
+    public FullSpanSizeLookup(ComplexAdapter complexAdapter, GridLayoutManager gridLayoutManager) {
+        this.complexAdapter = complexAdapter;
         this.gridLayoutManager = gridLayoutManager;
         this.wrappedSpanSizeLookup = gridLayoutManager.getSpanSizeLookup();
     }
 
     @Override
     public int getSpanSize(int position) {
-        if (wrapperAdapter.isHeaderRow(position)) {
+        if (complexAdapter.isHeaderRow(position)) {
             return gridLayoutManager.getSpanCount();
-        }else if(wrapperAdapter.isFooterRow(position)){
+        }else if(complexAdapter.isFooterRow(position)){
+            return gridLayoutManager.getSpanCount();
+        }else if(complexAdapter.isStatusRow(position)){
             return gridLayoutManager.getSpanCount();
         } else {
             return wrappedSpanSizeLookup.getSpanSize(position);
         }
     }
 
-    public GridLayoutManager.SpanSizeLookup getWrappedSpanSizeLookup() {
-        return wrappedSpanSizeLookup;
-    }
 }

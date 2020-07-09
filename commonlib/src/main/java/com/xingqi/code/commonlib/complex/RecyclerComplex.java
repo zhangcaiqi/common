@@ -3,28 +3,47 @@ package com.xingqi.code.commonlib.complex;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xingqi.code.commonlib.base.BaseAdapter;
+import com.xingqi.code.commonlib.paginate.LoadingListItemCreator;
+import com.xingqi.code.commonlib.paginate.NoDataListItemCreator;
+import com.xingqi.code.commonlib.paginate.NoMoreListItemCreator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerComplex {
+public class RecyclerComplex<T> {
     private RecyclerView recyclerView;
+    private ComplexAdapter complexAdapter;
+    private BaseAdapter<T> adapter;
 
     public RecyclerComplex(Builder builder){
         this.recyclerView = builder.recyclerView;
         List<HeaderItemCreator> headerList = builder.headerList;
         List<FooterItemCreator> footerList = builder.footerList;
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
-        WrapperAdapter wrapperAdapter = new WrapperAdapter(adapter,headerList,footerList);
-        wrapperAdapter.setHasStableIds(true);
-        recyclerView.setAdapter(wrapperAdapter);
+        adapter = (BaseAdapter<T>) recyclerView.getAdapter();
+        LoadingListItemCreator loadingListItemCreator = builder.loadingListItemCreator;
+        NoMoreListItemCreator noMoreListItemCreator = builder.noMoreListItemCreator;
+        NoDataListItemCreator noDataListItemCreator = builder.noDataListItemCreator;
+        int pageSize = builder.pageSize;
+
+        complexAdapter = new ComplexAdapter(
+                                        adapter,
+                                        headerList,
+                                        footerList,
+                                        loadingListItemCreator,
+                                        noMoreListItemCreator,
+                                        noDataListItemCreator,
+                                        pageSize,
+                                        builder.callback);
+        recyclerView.setAdapter(complexAdapter);
 
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
             GridLayoutManager gridLayoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
             GridLayoutManager.SpanSizeLookup spanSizeLookup;
             if(builder.fullSpan){
-                spanSizeLookup = new FullSpanSizeLookup(wrapperAdapter,gridLayoutManager);
+                spanSizeLookup = new FullSpanSizeLookup(complexAdapter,gridLayoutManager);
             }else{
-                spanSizeLookup = new CustomSpanSizeLookup(wrapperAdapter,gridLayoutManager);
+                spanSizeLookup = new CustomSpanSizeLookup(complexAdapter,gridLayoutManager);
             }
             gridLayoutManager.setSpanSizeLookup(spanSizeLookup);
 
@@ -37,7 +56,15 @@ public class RecyclerComplex {
 
         private List<FooterItemCreator> footerList = new ArrayList<>();
 
+        private NoDataListItemCreator noDataListItemCreator = NoDataListItemCreator.DEFAULT;
+        private LoadingListItemCreator loadingListItemCreator = LoadingListItemCreator.DEFAULT;
+        private NoMoreListItemCreator noMoreListItemCreator = NoMoreListItemCreator.DEFAULT;
+
+        private int pageSize;
+
         private boolean fullSpan = true;
+
+        private PaginateCallback callback;
 
         public Builder(RecyclerView recyclerView) {
             this.recyclerView = recyclerView;
@@ -51,10 +78,37 @@ public class RecyclerComplex {
             footerList.add(footerItemCreator);
             return this;
         }
-        public Builder setFullSpan(boolean fullSpan){
+        public Builder fullSpan(boolean fullSpan){
             this.fullSpan = fullSpan;
             return this;
         }
+
+
+        public Builder noDataListItemCreator(NoDataListItemCreator noDataListItemCreator) {
+            this.noDataListItemCreator = noDataListItemCreator;
+            return this;
+        }
+
+        public Builder loadingListItemCreator(LoadingListItemCreator loadingListItemCreator) {
+            this.loadingListItemCreator = loadingListItemCreator;
+            return this;
+        }
+
+        public Builder noMoreListItemCreator(NoMoreListItemCreator noMoreListItemCreator) {
+            this.noMoreListItemCreator = noMoreListItemCreator;
+            return this;
+        }
+
+        public Builder pageSize(int pageSize) {
+            this.pageSize = pageSize;
+            return this;
+        }
+
+        public Builder callback(PaginateCallback callback) {
+            this.callback = callback;
+            return this;
+        }
+
         public RecyclerComplex build(){
             return new RecyclerComplex(this);
         }
@@ -62,5 +116,27 @@ public class RecyclerComplex {
 
     public static Builder with(RecyclerView recyclerView){
         return new Builder(recyclerView);
+    }
+
+    public void appendData(boolean pullToRefresh,int total,List<T> items){
+        List<T> dataList = adapter.getDataList();
+        if(pullToRefresh){
+            dataList.clear();
+        }
+        int preEndIndex = dataList.size();
+        complexAdapter.setTotal(total);
+
+        dataList.addAll(items);
+        if(pullToRefresh){
+            complexAdapter.notifyDataSetChanged();
+        }else{
+            if(!complexAdapter.hasLoadedAllItems()){
+                complexAdapter.notifyItemRangeInserted(preEndIndex, items.size());
+            }else{
+                complexAdapter.notifyItemRangeInserted(preEndIndex, items.size()+1);
+            }
+
+        }
+        complexAdapter.setShowStatusRow(true);
     }
 }
