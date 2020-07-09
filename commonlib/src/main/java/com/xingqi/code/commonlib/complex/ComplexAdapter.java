@@ -72,8 +72,6 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
                 return noMoreListItemCreator.onCreateViewHolder(parent, viewType);
             }else{
 
-                callback.onLoadMore(page,pageSize);
-                page++;
                 return loadingListItemCreator.onCreateViewHolder(parent,viewType);
             }
         }
@@ -88,6 +86,11 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
             findFooterByPosition(position).onBindViewHolder(holder,position);
         }else if(isStatusRow(position)){
             //无绑定数据
+            if(!hasLoadedAllItems()){
+                callback.onLoadMore(page,pageSize);
+                page++;
+            }
+
         }else{
             adapter.onBindViewHolder(holder,position);
         }
@@ -115,6 +118,12 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         return super.getItemViewType(position);
 
     }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     public boolean isHeaderRow(int position){
         return position < headerList.size();
     }
@@ -123,7 +132,13 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public boolean isStatusRow(int position){
-        return position == headerList.size() + getItemCount() -1 ;
+        if(isShowStatusRow){
+            int itemCount = getItemCount();
+            if(position == itemCount -1){
+                return true;
+            }
+        }
+        return false ;
     }
     public HeaderItemCreator findHeaderByPosition(int position){
         return headerList.get(position);

@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".mvp.ui.OptionActivity"></activity>
+        <activity android:name=".mvp.ui.FoodListActivity"></activity>
+        <activity android:name=".mvp.ui.OptionActivity" />
         <activity android:name=".mvp.ui.TabActivity" />
         <activity android:name=".mvp.ui.MainActivity">
             <intent-filter>

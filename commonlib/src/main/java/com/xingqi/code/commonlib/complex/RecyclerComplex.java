@@ -131,9 +131,9 @@ public class RecyclerComplex<T> {
             complexAdapter.notifyDataSetChanged();
         }else{
             if(!complexAdapter.hasLoadedAllItems()){
-                complexAdapter.notifyItemRangeInserted(preEndIndex, items.size());
+                complexAdapter.notifyItemRangeChanged(preEndIndex, items.size()+1);
             }else{
-                complexAdapter.notifyItemRangeInserted(preEndIndex, items.size()+1);
+                complexAdapter.notifyItemRangeChanged(preEndIndex, items.size()+1);
             }
 
         }
