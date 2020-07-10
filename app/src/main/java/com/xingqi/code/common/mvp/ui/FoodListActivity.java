@@ -53,9 +53,8 @@ public class FoodListActivity extends BaseActivity<FoodPresenter> implements Foo
         foodAdapter = new FoodAdapter(this);
         rvFood.setLayoutManager(new LinearLayoutManager(this));
         rvFood.setAdapter(foodAdapter);
-        complex = HeaderPage.with(rvFood)
+        complex = HeaderPage.with(rvFood,this)
                 .pageSize(pageSize)
-                .callback(this)
                 .build();
         mPresenter.findFoodPage(true,1,pageSize);
     }

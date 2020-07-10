@@ -63,8 +63,9 @@ public class HeaderPage<T> {
 
         private PaginateCallback callback;
 
-        public Builder(RecyclerView recyclerView) {
+        public Builder(RecyclerView recyclerView,PaginateCallback callback) {
             this.recyclerView = recyclerView;
+            this.callback = callback;
         }
 
         public Builder addHeader(HeaderItemCreator headerItemCreator){
@@ -97,18 +98,14 @@ public class HeaderPage<T> {
             return this;
         }
 
-        public Builder callback(PaginateCallback callback) {
-            this.callback = callback;
-            return this;
-        }
 
         public HeaderPage build(){
             return new HeaderPage(this);
         }
     }
 
-    public static Builder with(RecyclerView recyclerView){
-        return new Builder(recyclerView);
+    public static Builder with(RecyclerView recyclerView,PaginateCallback callback){
+        return new Builder(recyclerView,callback);
     }
 
     public void appendData(boolean pullToRefresh,int total,List<T> items){
