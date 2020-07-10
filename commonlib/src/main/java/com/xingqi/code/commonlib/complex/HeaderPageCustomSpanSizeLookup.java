@@ -4,22 +4,22 @@ package com.xingqi.code.commonlib.complex;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 
-class CustomSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+class HeaderPageCustomSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
     private final GridLayoutManager.SpanSizeLookup wrappedSpanSizeLookup;
-    private final WrapperAdapter wrapperAdapter;
+    private final HeaderPageAdapter headerPageAdapter;
     private GridLayoutManager gridLayoutManager;
-    public CustomSpanSizeLookup(WrapperAdapter wrapperAdapter, GridLayoutManager gridLayoutManager) {
-        this.wrapperAdapter = wrapperAdapter;
+    public HeaderPageCustomSpanSizeLookup(HeaderPageAdapter headerPageAdapter, GridLayoutManager gridLayoutManager) {
+        this.headerPageAdapter = headerPageAdapter;
         this.gridLayoutManager = gridLayoutManager;
         this.wrappedSpanSizeLookup = gridLayoutManager.getSpanSizeLookup();
     }
 
     @Override
     public int getSpanSize(int position) {
-        if (wrapperAdapter.isHeaderRow(position)) {
-            return wrapperAdapter.findHeaderByPosition(position).getSpanSize();
-        }else if(wrapperAdapter.isFooterRow(position)){
+        if (headerPageAdapter.isHeaderRow(position)) {
+            return headerPageAdapter.findHeaderByPosition(position).getSpanSize();
+        }else if(headerPageAdapter.isStatusRow(position)){
             return gridLayoutManager.getSpanCount();
         } else {
             return wrappedSpanSizeLookup.getSpanSize(position);

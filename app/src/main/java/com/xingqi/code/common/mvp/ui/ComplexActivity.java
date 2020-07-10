@@ -10,6 +10,7 @@ import com.xingqi.code.common.adapter.ComplexAdapter;
 import com.xingqi.code.common.complex.FooterOne;
 import com.xingqi.code.common.complex.HeaderOne;
 import com.xingqi.code.commonlib.base.BaseActivity;
+import com.xingqi.code.commonlib.complex.HeaderPage;
 import com.xingqi.code.commonlib.complex.RecyclerComplex;
 import com.xingqi.code.commonlib.mvp.BasePresenter;
 

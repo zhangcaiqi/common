@@ -4,23 +4,23 @@ package com.xingqi.code.commonlib.complex;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 
-class FullSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+class HeaderPageFullSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
 
     private final GridLayoutManager.SpanSizeLookup wrappedSpanSizeLookup;
-    private final WrapperAdapter wrapperAdapter;
+    private final HeaderPageAdapter headerPageAdapter;
     private final GridLayoutManager gridLayoutManager;
 
-    public FullSpanSizeLookup(WrapperAdapter wrapperAdapter, GridLayoutManager gridLayoutManager) {
-        this.wrapperAdapter = wrapperAdapter;
+    public HeaderPageFullSpanSizeLookup(HeaderPageAdapter headerPageAdapter, GridLayoutManager gridLayoutManager) {
+        this.headerPageAdapter = headerPageAdapter;
         this.gridLayoutManager = gridLayoutManager;
         this.wrappedSpanSizeLookup = gridLayoutManager.getSpanSizeLookup();
     }
 
     @Override
     public int getSpanSize(int position) {
-        if (wrapperAdapter.isHeaderRow(position)) {
+        if (headerPageAdapter.isHeaderRow(position)) {
             return gridLayoutManager.getSpanCount();
-        }else if(wrapperAdapter.isFooterRow(position)){
+        }else if(headerPageAdapter.isStatusRow(position)){
             return gridLayoutManager.getSpanCount();
         } else {
             return wrappedSpanSizeLookup.getSpanSize(position);

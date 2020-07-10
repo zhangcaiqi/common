@@ -14,7 +14,7 @@ import com.xingqi.code.common.mvp.model.entity.Food;
 import com.xingqi.code.common.mvp.presenter.FoodPresenter;
 import com.xingqi.code.commonlib.base.BaseActivity;
 import com.xingqi.code.commonlib.complex.PaginateCallback;
-import com.xingqi.code.commonlib.complex.RecyclerComplex;
+import com.xingqi.code.commonlib.complex.HeaderPage;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class FoodListActivity extends BaseActivity<FoodPresenter> implements Foo
     @BindView(R.id.rv_food)
     RecyclerView rvFood;
     FoodAdapter foodAdapter;
-    RecyclerComplex<Food> complex;
+    HeaderPage<Food> complex;
     int pageSize = 50;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class FoodListActivity extends BaseActivity<FoodPresenter> implements Foo
         foodAdapter = new FoodAdapter(this);
         rvFood.setLayoutManager(new LinearLayoutManager(this));
         rvFood.setAdapter(foodAdapter);
-        complex = RecyclerComplex.with(rvFood)
+        complex = HeaderPage.with(rvFood)
                 .pageSize(pageSize)
                 .callback(this)
                 .build();

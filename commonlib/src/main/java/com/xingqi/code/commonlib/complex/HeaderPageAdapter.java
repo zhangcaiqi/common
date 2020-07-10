@@ -11,22 +11,18 @@ import com.xingqi.code.commonlib.paginate.NoMoreListItemCreator;
 
 import java.util.List;
 
-public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public  class HeaderPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private RecyclerView.Adapter adapter;
     private List<HeaderItemCreator> headerList;
-    private List<FooterItemCreator> footerList;
 
     private boolean isShowStatusRow ;
-
-    private int ITEM_TYPE_STATUS_ROW = - 1;
-
 
     private LoadingListItemCreator loadingListItemCreator;
     private NoMoreListItemCreator noMoreListItemCreator;
     private NoDataListItemCreator noDataListItemCreator;
 
-    private int page = 1;
+    private int page = 2;
 
     private int pageSize;
 
@@ -34,18 +30,20 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private PaginateCallback callback;
 
+    public final static int ITEM_TYPE_HAS_MORE = 1;
+    public final static int ITEM_TYPE_NO_MORE = 2;
+    public final static int ITEM_TYPE_NO_DATA = 3;
+    public volatile int itemType = ITEM_TYPE_HAS_MORE;
 
-    public ComplexAdapter(RecyclerView.Adapter adapter,
-                          List<HeaderItemCreator> headerList,
-                          List<FooterItemCreator> footerList,
-                          LoadingListItemCreator loadingListItemCreator,
-                          NoMoreListItemCreator noMoreListItemCreator,
-                          NoDataListItemCreator noDataListItemCreator,
-                          int pageSize,
-                          PaginateCallback callback) {
+    public HeaderPageAdapter(RecyclerView.Adapter adapter,
+                             List<HeaderItemCreator> headerList,
+                             LoadingListItemCreator loadingListItemCreator,
+                             NoMoreListItemCreator noMoreListItemCreator,
+                             NoDataListItemCreator noDataListItemCreator,
+                             int pageSize,
+                             PaginateCallback callback) {
         this.adapter = adapter;
         this.headerList = headerList;
-        this.footerList = footerList;
         this.loadingListItemCreator = loadingListItemCreator;
         this.noMoreListItemCreator = noMoreListItemCreator;
         this.noDataListItemCreator = noDataListItemCreator;
@@ -59,21 +57,12 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         HeaderItemCreator headerItemCreator = this.findHeader(viewType);
         if (null != headerItemCreator) {
             return headerItemCreator.onCreateViewHolder(parent, viewType);
-        }
-
-        FooterItemCreator footerItemCreator = this.findFooter(viewType);
-        if(null != footerItemCreator){
-            return footerItemCreator.onCreateViewHolder(parent, viewType);
-        }
-        if(viewType == ITEM_TYPE_STATUS_ROW ){
-            if(total == 0){
-                return noDataListItemCreator.onCreateViewHolder(parent,viewType);
-            }else if(hasLoadedAllItems()){
-                return noMoreListItemCreator.onCreateViewHolder(parent, viewType);
-            }else{
-
-                return loadingListItemCreator.onCreateViewHolder(parent,viewType);
-            }
+        }else if(viewType == ITEM_TYPE_NO_DATA ){
+            return noDataListItemCreator.onCreateViewHolder(parent,viewType);
+        }else if(viewType == ITEM_TYPE_HAS_MORE){
+            return loadingListItemCreator.onCreateViewHolder(parent,viewType);
+        }else if(viewType == ITEM_TYPE_NO_MORE){
+            return noMoreListItemCreator.onCreateViewHolder(parent, viewType);
         }
         return adapter.onCreateViewHolder(parent,viewType);
     }
@@ -82,24 +71,21 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (isHeaderRow(position)) {
             findHeaderByPosition(position).onBindViewHolder(holder,position);
-        }else if(isFooterRow(position)){
-            findFooterByPosition(position).onBindViewHolder(holder,position);
         }else if(isStatusRow(position)){
             //无绑定数据
             if(!hasLoadedAllItems()){
                 callback.onLoadMore(page,pageSize);
                 page++;
             }
-
         }else{
-            adapter.onBindViewHolder(holder,position);
+            adapter.onBindViewHolder(holder,position-headerList.size());
         }
 
     }
 
     @Override
     public int getItemCount() {
-        int itemCount = headerList.size() + footerList.size() + adapter.getItemCount();
+        int itemCount = headerList.size()  + adapter.getItemCount();
         if(isShowStatusRow){
             itemCount = itemCount + 1;
         }
@@ -109,26 +95,16 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemViewType(int position) {
         if(isHeaderRow(position)){
             return headerList.get(position).hashCode();
-        } else if(isFooterRow(position)){
-            int footerRealPosition = getFooterRealPosition(position);
-            return footerList.get(footerRealPosition).hashCode();
-        }else if(isStatusRow(position)){
-            return ITEM_TYPE_STATUS_ROW;
+        } else if(isStatusRow(position)){
+            return itemType;
         }
         return super.getItemViewType(position);
 
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
 
     public boolean isHeaderRow(int position){
         return position < headerList.size();
-    }
-    public boolean isFooterRow(int position){
-        return position >= getItemCount() - footerList.size();
     }
 
     public boolean isStatusRow(int position){
@@ -144,25 +120,10 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
         return headerList.get(position);
     }
 
-    protected  FooterItemCreator findFooterByPosition(int position){
-        int realPosition = getFooterRealPosition(position);
-        return footerList.get(realPosition);
-    }
-    private int getFooterRealPosition(int position){
-        return position - headerList.size() - adapter.getItemCount();
-    }
     HeaderItemCreator findHeader(int itemType){
         for(HeaderItemCreator headerItemCreator:headerList){
             if(itemType == headerItemCreator.hashCode()){
                 return headerItemCreator;
-            }
-        }
-        return null;
-    }
-    FooterItemCreator findFooter(int itemType){
-        for(FooterItemCreator footerItemCreator:footerList){
-            if(itemType == footerItemCreator.hashCode()){
-                return footerItemCreator;
             }
         }
         return null;
@@ -183,5 +144,13 @@ public  class ComplexAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     public RecyclerView.Adapter getWrappedAdapter() {
         return adapter;
+    }
+
+    public void setItemType(int itemType){
+        this.itemType = itemType;
+    }
+
+    public void resetPage(){
+        this.page = 2;
     }
 }
