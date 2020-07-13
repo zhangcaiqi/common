@@ -124,14 +124,13 @@ public class HeaderPage<T> {
         if(pullToRefresh){
             headerPageAdapter.notifyDataSetChanged();
         }else{
-            if(!headerPageAdapter.hasLoadedAllItems()){
-                headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_HAS_MORE);
-
-            }else{
-                headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_NO_MORE);
-            }
             headerPageAdapter.notifyItemRangeChanged(preEndIndex, items.size()+1);
+        }
+        if(!headerPageAdapter.hasLoadedAllItems()){
+            headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_HAS_MORE);
 
+        }else{
+            headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_NO_MORE);
         }
         headerPageAdapter.setShowStatusRow(true);
     }
