@@ -18,7 +18,7 @@ public interface NoDataListItemCreator {
     NoDataListItemCreator DEFAULT = new NoDataListItemCreator() {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.no_more_row, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.no_data_row, parent, false);
             return new RecyclerView.ViewHolder(view) {
             };
         }
