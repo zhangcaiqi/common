@@ -16,8 +16,9 @@ public class FooterOne extends BaseFooter {
         return R.layout.layout_footer;
     }
 
+
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    protected void bindViewHolder(ViewHolder holder, int position) {
         holder.setText(R.id.text_view,"footerOne");
     }
 

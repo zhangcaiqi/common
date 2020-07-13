@@ -128,7 +128,7 @@ public class HeaderPage<T> {
                 headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_HAS_MORE);
 
             }else{
-                headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_NO_DATA);
+                headerPageAdapter.setItemType(HeaderPageAdapter.ITEM_TYPE_NO_MORE);
             }
             headerPageAdapter.notifyItemRangeChanged(preEndIndex, items.size()+1);
 

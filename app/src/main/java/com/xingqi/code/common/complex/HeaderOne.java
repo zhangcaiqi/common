@@ -17,8 +17,9 @@ public class HeaderOne extends BaseHeader {
         return R.layout.layout_header;
     }
 
+
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    protected void bindViewHolder(ViewHolder holder, int position) {
         holder.setText(R.id.text_view,"headerOne");
     }
 

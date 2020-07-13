@@ -13,12 +13,17 @@ public class RxUtil {
     public static <T> ObservableTransformer<T, T> applySchedulers(final IView view) {
         return observable -> observable.subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable -> {
-                    view.showLoading();//显示进度条
+                    if(null != view){
+                        view.showLoading();//显示进度条
+                    }
+
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> {
-                    view.hideLoading();//隐藏进度条
+                    if(null != view){
+                        view.hideLoading();//隐藏进度条
+                    }
                 }).compose(RxLifecycleUtils.bindToLifecycle(view));
     }
 }

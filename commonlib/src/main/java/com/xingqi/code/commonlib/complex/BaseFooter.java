@@ -7,7 +7,7 @@ import com.xingqi.code.commonlib.base.BaseApplication;
 
 public abstract class BaseFooter implements FooterItemCreator<ViewHolder> {
     protected Context context;
-
+    private boolean init;
     public BaseFooter(Context context) {
         this.context = context;
     }
@@ -17,6 +17,16 @@ public abstract class BaseFooter implements FooterItemCreator<ViewHolder> {
         ViewHolder viewHolder = ViewHolder.get(context,parent,getLayoutResId());
         return viewHolder;
     }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        if(!init){
+            bindViewHolder(holder,position);
+        }
+        init = true;
+    }
+    protected abstract void bindViewHolder(ViewHolder holder, int position);
+
     protected abstract int getLayoutResId();
 
 }
