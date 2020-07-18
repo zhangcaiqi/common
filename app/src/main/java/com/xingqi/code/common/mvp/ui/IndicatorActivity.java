@@ -98,4 +98,8 @@ public class IndicatorActivity extends BaseActivity {
     public String toolbarTitle() {
         return null;
     }
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 }

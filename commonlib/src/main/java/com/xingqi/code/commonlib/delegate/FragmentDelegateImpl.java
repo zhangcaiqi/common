@@ -38,13 +38,14 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
         Activity activity = fragment.getActivity();
         IAppStyle iAppStyle = new DefaultAppStyleImpl.Builder(activity)
-                .setDarkStatusBarText(iFragment.darkStatusBarText())
-                .setDisplayNavigateIcon(iFragment.displayNavigateIcon())
-                .setHasToolbar(iFragment.hasToolbar())
-                .setNavigateIconRes(iFragment.navigateIconRes())
-                .setToolbarTitle(iFragment.toolbarTitle())
-                .setToolbarColor(iFragment.toolbarColor())
-                .setListener((v -> {iFragment.onNavigateClick();}))
+                .darkStatusBarText(iFragment.darkStatusBarText())
+                .displayNavigateIcon(iFragment.displayNavigateIcon())
+                .hasToolbar(iFragment.hasToolbar())
+                .statusBarColor(iFragment.statusBarColor())
+                .navigateIconRes(iFragment.navigateIconRes())
+                .toolbarTitle(iFragment.toolbarTitle())
+                .toolbarColor(iFragment.toolbarColor())
+                .listener((v -> {iFragment.onNavigateClick();}))
                 .build();
         if(iFragment.isSetAppBarStyle()){
             iAppStyle.setAppBarStyle();

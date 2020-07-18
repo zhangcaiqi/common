@@ -23,6 +23,10 @@ import java.util.List;
 import butterknife.BindView;
 
 public class TabActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     @BindView(R.id.bottom_tab)

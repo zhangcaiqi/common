@@ -26,6 +26,10 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<HotKeyWordPresenter> implements HotKeyWordContract.View {
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
     private static final String TAG = "MainActivity";
     @BindView(R.id.text_view)
     TextView textView;

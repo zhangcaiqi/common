@@ -63,4 +63,8 @@ public class FragmentFive extends BaseFragment<HotKeyWordPresenter> implements H
     public void hideLoading() {
         LoadingDialogManager.getInstance().hideLoading();
     }
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 }

@@ -19,6 +19,8 @@ public interface IPage {
 
     int toolbarColor();
 
+    int statusBarColor();
+
     boolean displayNavigateIcon();
 
     int navigateIconRes();
@@ -30,6 +32,8 @@ public interface IPage {
     void release();
 
     void disposable();
+
+
 
     Context getOwnContext();
 

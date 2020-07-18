@@ -94,4 +94,8 @@ public class Main2Activity extends BaseActivity<HotKeyWordPresenter> implements 
     public  void hideLoading() {
         LoadingDialogManager.getInstance().hideLoading();
     }
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 }

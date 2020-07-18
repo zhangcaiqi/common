@@ -9,6 +9,10 @@ import com.xingqi.code.commonlib.base.BaseActivity;
 import com.xingqi.code.commonlib.mvp.BasePresenter;
 
 public class OptionActivity extends BaseActivity {
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

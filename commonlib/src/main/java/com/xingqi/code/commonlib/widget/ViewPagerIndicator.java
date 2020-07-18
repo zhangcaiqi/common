@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -140,7 +141,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
         mTabWidth = mTabWidth == 0 ? (getScreenWidth()/mVisibleCount) : mTabWidth;
         for(int i=0; i<childrenCount;i++){
             TextView view = (TextView) getChildAt(i);
-            view.setTextSize(textSize);
+            view.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
             view.setTextColor(textColor);
             LinearLayout.LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
             layoutParams.width = mTabWidth;
@@ -226,9 +227,9 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
             if(position >= selectedPosition){//向左滑动
                 TextView next = (TextView) getChildAt(selectedPosition+1);
                 float currentTextSize = selectedSize - positionOffset*changedSize;
-                current.setTextSize(currentTextSize);
+                current.setTextSize(TypedValue.COMPLEX_UNIT_PX,currentTextSize);
                 float nextSize = textSize + positionOffset*changedSize;
-                next.setTextSize(nextSize);
+                next.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextSize);
                 if(positionOffset > 0.5){
                     next.setTypeface(null, Typeface.BOLD);
                     next.setTextColor(textColorSelect);
@@ -244,8 +245,8 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
                 TextView previous = (TextView) getChildAt(selectedPosition-1);
                 float currentTextSize = selectedSize - (1-positionOffset)*changedSize;
                 float previousSize = textSize + (1-positionOffset)*changedSize;
-                current.setTextSize(currentTextSize);
-                previous.setTextSize(previousSize);
+                current.setTextSize(TypedValue.COMPLEX_UNIT_PX,currentTextSize);
+                previous.setTextSize(TypedValue.COMPLEX_UNIT_PX,previousSize);
                 if(positionOffset < 0.5){
                     previous.setTypeface(null, Typeface.BOLD);
                     previous.setTextColor(textColorSelect);
@@ -260,7 +261,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
             }
         }else{
             //选中时
-            current.setTextSize(selectedSize);
+            current.setTextSize(TypedValue.COMPLEX_UNIT_PX,selectedSize);
             current.setTypeface(null, Typeface.BOLD);
             current.setTextColor(textColorSelect);
         }
@@ -294,7 +295,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
         int count = getChildCount();
         for(int i=0;i<count;i++){
             TextView textView = (TextView) getChildAt(i);
-            textView.setTextSize(textSize);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
             textView.setTypeface(null, Typeface.NORMAL);
             textView.setTextColor(textColor);
         }
@@ -324,7 +325,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
     private View generateTab(String title){
         mTabWidth = mTabWidth == 0 ? (getScreenWidth()/mVisibleCount) : mTabWidth;
         TextView view = new TextView(context);
-        view.setTextSize(textSize);
+        view.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
         view.setTextColor(textColor);
         view.setText(title);
         view.setGravity(Gravity.CENTER);

@@ -72,4 +72,9 @@ public class ComplexActivity extends BaseActivity {
     public String toolbarTitle() {
         return null;
     }
+
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 }

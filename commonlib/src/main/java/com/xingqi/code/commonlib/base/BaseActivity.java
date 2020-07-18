@@ -43,13 +43,14 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         //设置侧滑返回
         setUpSwipeBack();
         IAppStyle iAppStyle = new DefaultAppStyleImpl.Builder(this)
-                .setDarkStatusBarText(darkStatusBarText())
-                .setDisplayNavigateIcon(displayNavigateIcon())
-                .setHasToolbar(hasToolbar())
-                .setNavigateIconRes(navigateIconRes())
-                .setToolbarTitle(toolbarTitle())
-                .setToolbarColor(toolbarColor())
-                .setListener((v -> {onNavigateClick();}))
+                .darkStatusBarText(darkStatusBarText())
+                .displayNavigateIcon(displayNavigateIcon())
+                .hasToolbar(hasToolbar())
+                .statusBarColor(statusBarColor())
+                .navigateIconRes(navigateIconRes())
+                .toolbarTitle(toolbarTitle())
+                .toolbarColor(toolbarColor())
+                .listener((v -> {onNavigateClick();}))
                 .build();
         //设置状态栏
         iAppStyle.setAppBarStyle();

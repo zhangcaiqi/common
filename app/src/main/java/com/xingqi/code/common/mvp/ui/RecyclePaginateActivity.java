@@ -16,6 +16,10 @@ import com.xingqi.code.commonlib.paginate.Paginate;
 import butterknife.BindView;
 
 public class RecyclePaginateActivity extends BaseActivity implements Paginate.Callbacks {
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;

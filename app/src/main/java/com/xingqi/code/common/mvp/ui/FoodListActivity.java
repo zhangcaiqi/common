@@ -88,4 +88,8 @@ public class FoodListActivity extends BaseActivity<FoodPresenter> implements Foo
     public void onLoadMore(int page, int pageSize) {
         mPresenter.findFoodPage(false,page,pageSize);
     }
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
 }

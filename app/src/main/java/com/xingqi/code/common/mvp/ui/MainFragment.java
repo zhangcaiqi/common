@@ -22,6 +22,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
+    @Override
+    public int statusBarColor() {
+        return R.color.colorPrimary;
+    }
     @BindView(R.id.send_msg_btn)
     Button sendMsgBtn;
     @BindView(R.id.jump_to_page)
