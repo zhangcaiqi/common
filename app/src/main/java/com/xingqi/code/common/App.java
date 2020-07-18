@@ -46,6 +46,11 @@ public class App extends BaseApplication {
 
     }
 
+    @Override
+    protected int unifyStatusBarColor() {
+        return R.color.red;
+    }
+
 
     @Override
     protected GlobalHttpHandler providerGlobalHttpHandler() {

@@ -73,8 +73,4 @@ public class ComplexActivity extends BaseActivity {
         return null;
     }
 
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
-    }
 }

@@ -98,6 +98,12 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     @Override
+    public int statusBarColor() {
+        BaseApplication app = (BaseApplication) getActivity().getApplication();
+        return app.unifyStatusBarColor();
+    }
+
+    @Override
     public boolean displayNavigateIcon() {
         return true;
     }

@@ -112,6 +112,12 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     @Override
+    public int statusBarColor() {
+        BaseApplication app = (BaseApplication) getApplication();
+        return app.unifyStatusBarColor();
+    }
+
+    @Override
     public boolean displayNavigateIcon() {
         return true;
     }

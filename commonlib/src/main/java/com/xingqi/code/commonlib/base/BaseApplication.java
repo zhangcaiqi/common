@@ -93,6 +93,9 @@ public abstract class BaseApplication extends Application {
 
     protected abstract void addFragmentCallback(List<FragmentManager.FragmentLifecycleCallbacks> fragmentLifecycleCallbacksList);
 
+    protected abstract int unifyStatusBarColor();
+
+
     protected void buildGlobalConfig(){
         okHttpClientBuilder = new OkHttpClient.Builder();
         GlobalHttpHandler globalHttpHandler = providerGlobalHttpHandler();
