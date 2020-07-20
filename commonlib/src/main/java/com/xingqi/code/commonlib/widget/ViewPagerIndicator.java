@@ -210,6 +210,7 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
         // 容器滚动，当移动到倒数最后一个的时候，开始滚动
          if (positionOffset > 0
                  && position >= (mVisibleCount - 2)
+                 && position < getChildCount() -2
                  && getChildCount() > mVisibleCount){
              if (mVisibleCount != 1){
                  this.scrollTo((position - (mVisibleCount - 2)) * mTabWidth + (int) (mTabWidth * positionOffset), 0);
