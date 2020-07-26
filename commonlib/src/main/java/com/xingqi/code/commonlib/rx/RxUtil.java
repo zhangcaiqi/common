@@ -26,4 +26,22 @@ public class RxUtil {
                     }
                 }).compose(RxLifecycleUtils.bindToLifecycle(view));
     }
+    public static <T> ObservableTransformer<T, T> applySchedulers(boolean pullToRefresh,final IView view) {
+        return observable -> observable.subscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable -> {
+                    if(null != view){
+                        if(pullToRefresh)
+                        view.showLoading();//显示进度条
+                    }
+
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> {
+                    if(null != view){
+                        if(pullToRefresh)
+                        view.hideLoading();//隐藏进度条
+                    }
+                }).compose(RxLifecycleUtils.bindToLifecycle(view));
+    }
 }
