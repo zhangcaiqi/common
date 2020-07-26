@@ -29,7 +29,9 @@ public class LoadingDialogManager {
         }else{
             loadingDialog.dismiss();
         }
+        loadingDialog.setMessage(message);
         loadingDialog.show(fm,TAG);
+
     }
 
     public synchronized void hideLoading(){

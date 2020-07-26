@@ -36,6 +36,12 @@ public class LoadingDialog extends DialogFragment {
         return dlg;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        setMessage("");
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +53,12 @@ public class LoadingDialog extends DialogFragment {
             textView.setText(message);
         }
         return view;
+    }
+
+    public void setMessage(String message){
+        Bundle bundle = new Bundle();
+        bundle.putString("message",message);
+        setArguments(bundle);
     }
 
 

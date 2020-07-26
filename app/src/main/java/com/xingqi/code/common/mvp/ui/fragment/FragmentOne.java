@@ -56,7 +56,7 @@ public class FragmentOne extends BaseFragment<HotKeyWordPresenter> implements Ho
 
     @Override
     public void showLoading() {
-        LoadingDialogManager.getInstance().showLoading(getActivity().getSupportFragmentManager());
+        LoadingDialogManager.getInstance().showLoading(getActivity().getSupportFragmentManager(),"fragmentOne");
     }
 
     @Override
