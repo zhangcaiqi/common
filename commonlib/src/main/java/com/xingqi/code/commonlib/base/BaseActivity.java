@@ -136,7 +136,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     public void onNavigateClick() {
         onBackPressed();
     }
-    private boolean isSupportSwipeBack(){
+    protected boolean isSupportSwipeBack(){
         if(!isRootPage()){
             return true;
         }else{

@@ -110,15 +110,15 @@ public class BitmapUtil {
         }
     }
 
-    public static Bitmap cropToSquare(File imageFile,float ratio){
+    public static Bitmap cropToSquare(File imageFile, float ratio) {
         Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
         int width = bitmap.getWidth(); // 得到图片的宽，高
-        int height = (int) (bitmap.getHeight()* ratio);
+        int height = (int) (bitmap.getHeight() * ratio);
         //取最短的边长
         int squareSize = width > height ? height : width;
         int startX = width > height ? (width - height) / 2 : 0;
         int startY = width < height ? (height - width) / 2 : 0;
-        Bitmap rlt = Bitmap.createBitmap(bitmap,startX,startY,squareSize,squareSize);
+        Bitmap rlt = Bitmap.createBitmap(bitmap, startX, startY, squareSize, squareSize);
         bitmap.recycle();
         return rlt;
     }
@@ -131,7 +131,8 @@ public class BitmapUtil {
 //        }
         return dst;
     }
-    public static boolean saveBitmapAsFile(String directory,String fileName, Bitmap bitmap) {
+
+    public static boolean saveBitmapAsFile(String directory, String fileName, Bitmap bitmap) {
         File saveFile = new File(directory, fileName);
 
         boolean saved = false;
@@ -151,4 +152,25 @@ public class BitmapUtil {
         return saved;
     }
 
+
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (height > reqHeight || width > reqWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+            while ((halfHeight / inSampleSize) > reqHeight && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+            long totalPixels = width / inSampleSize * height / inSampleSize;
+            final long totalReqPixelsCap = reqWidth * reqHeight * 2;
+            while (totalPixels > totalReqPixelsCap) {
+                inSampleSize *= 2;
+                totalPixels /= 2;
+            }
+        }
+        return inSampleSize;
+    }
 }
