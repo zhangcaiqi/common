@@ -75,6 +75,8 @@ public class SysActivityLifecycleCallback implements Application.ActivityLifecyc
             activityDelegate.onDestroy();
         }
         BaseApplication.activityDelegateMap.remove(activity.hashCode());
+        //解决内存溢出
+        activityDelegate = null;
     }
 
     private ActivityDelegate fetchDelegate(Activity activity){
