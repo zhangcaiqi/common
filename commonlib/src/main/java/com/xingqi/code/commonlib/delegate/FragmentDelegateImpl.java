@@ -95,6 +95,9 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onDestroyView() {
+        if(null != iFragment){
+            iFragment.release();
+        }
         //解绑BufferKnife
         if (unbinder != null && unbinder != Unbinder.EMPTY) {
             try {

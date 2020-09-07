@@ -88,12 +88,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
     @Override
     protected void onDestroy() {
+        release();
         disposable();
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
         this.mUnbinder = null;
-        release();
+
         super.onDestroy();
     }
     @Override
