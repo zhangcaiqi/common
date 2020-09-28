@@ -16,7 +16,10 @@ import com.xingqi.code.commonlib.http.GlobalHttpHandler;
 import com.xingqi.code.commonlib.http.log.DefaultFormatPrinter;
 import com.xingqi.code.commonlib.http.log.FormatPrinter;
 import com.xingqi.code.commonlib.http.log.RequestInterceptor;
+import com.xingqi.code.commonlib.imageloader.BaseImageLoaderStrategy;
+import com.xingqi.code.commonlib.imageloader.ImageConfig;
 import com.xingqi.code.commonlib.imageloader.glide.GlideImageLoaderStrategy;
+import com.xingqi.code.commonlib.imageloader.glide.ImageConfigImpl;
 import com.xingqi.code.commonlib.lifecycle.SysActivityLifecycleCallback;
 import com.xingqi.code.commonlib.lifecycle.SysFragmentLifecycleCallback;
 import com.xingqi.code.commonlib.rxlifecycle.ActivityLifecycleForRxLifecycle;
@@ -103,10 +106,11 @@ public abstract class BaseApplication extends Application {
         okHttpClient = buildOkHttpClient(interceptor,globalHttpHandler);
         globalConfig = GlobalConfig.with(this)
                 .cacheDir(new File(StorageDirUtil.getPublicExternalPicDir()))
-                .imageLoaderStrategy(new GlideImageLoaderStrategy())
+                .imageLoaderStrategy(imageLoaderStrategy())
                 .okHttpClient(okHttpClient)
                 .build();
     }
+    protected abstract BaseImageLoaderStrategy<ImageConfigImpl> imageLoaderStrategy();
 
     protected OkHttpClient buildOkHttpClient(Interceptor interceptor,GlobalHttpHandler httpHandler){
 

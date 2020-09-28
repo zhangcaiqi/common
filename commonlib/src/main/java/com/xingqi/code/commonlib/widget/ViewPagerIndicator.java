@@ -221,53 +221,53 @@ public class ViewPagerIndicator extends LinearLayout implements ViewPager.OnPage
     }
 
     private void textAdapt(){
-        TextView current = (TextView) getChildAt(selectedPosition);
-        float changedSize = textSizeRatio*textSize;
-        float selectedSize = textSize*(1+textSizeRatio);
-        if(positionOffset !=0){
-            if(position >= selectedPosition){//向左滑动
-                TextView next = (TextView) getChildAt(selectedPosition+1);
-                float currentTextSize = selectedSize - positionOffset*changedSize;
-                current.setTextSize(TypedValue.COMPLEX_UNIT_PX,currentTextSize);
-                float nextSize = textSize + positionOffset*changedSize;
-                next.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextSize);
-                if(positionOffset > 0.5){
-                    next.setTypeface(null, Typeface.BOLD);
-                    next.setTextColor(textColorSelect);
-                    current.setTypeface(null,Typeface.NORMAL);
-                    current.setTextColor(textColor);
-                }else{
-                    current.setTypeface(null, Typeface.BOLD);
-                    current.setTextColor(textColorSelect);
-                    next.setTypeface(null,Typeface.NORMAL);
-                    next.setTextColor(textColor);
+        if(getChildCount() > 0){
+            TextView current = (TextView) getChildAt(selectedPosition);
+            float changedSize = textSizeRatio*textSize;
+            float selectedSize = textSize*(1+textSizeRatio);
+            if(positionOffset !=0){
+                if(position >= selectedPosition){//向左滑动
+                    TextView next = (TextView) getChildAt(selectedPosition+1);
+                    float currentTextSize = selectedSize - positionOffset*changedSize;
+                    current.setTextSize(TypedValue.COMPLEX_UNIT_PX,currentTextSize);
+                    float nextSize = textSize + positionOffset*changedSize;
+                    next.setTextSize(TypedValue.COMPLEX_UNIT_PX,nextSize);
+                    if(positionOffset > 0.5){
+                        next.setTypeface(null, Typeface.BOLD);
+                        next.setTextColor(textColorSelect);
+                        current.setTypeface(null,Typeface.NORMAL);
+                        current.setTextColor(textColor);
+                    }else{
+                        current.setTypeface(null, Typeface.BOLD);
+                        current.setTextColor(textColorSelect);
+                        next.setTypeface(null,Typeface.NORMAL);
+                        next.setTextColor(textColor);
+                    }
+                }else{//向右滑动
+                    TextView previous = (TextView) getChildAt(selectedPosition-1);
+                    float currentTextSize = selectedSize - (1-positionOffset)*changedSize;
+                    float previousSize = textSize + (1-positionOffset)*changedSize;
+                    current.setTextSize(TypedValue.COMPLEX_UNIT_PX,currentTextSize);
+                    previous.setTextSize(TypedValue.COMPLEX_UNIT_PX,previousSize);
+                    if(positionOffset < 0.5){
+                        previous.setTypeface(null, Typeface.BOLD);
+                        previous.setTextColor(textColorSelect);
+                        current.setTypeface(null,Typeface.NORMAL);
+                        current.setTextColor(textColor);
+                    }else{
+                        current.setTypeface(null, Typeface.BOLD);
+                        current.setTextColor(textColorSelect);
+                        previous.setTypeface(null,Typeface.NORMAL);
+                        previous.setTextColor(textColor);
+                    }
                 }
-            }else{//向右滑动
-                TextView previous = (TextView) getChildAt(selectedPosition-1);
-                float currentTextSize = selectedSize - (1-positionOffset)*changedSize;
-                float previousSize = textSize + (1-positionOffset)*changedSize;
-                current.setTextSize(TypedValue.COMPLEX_UNIT_PX,currentTextSize);
-                previous.setTextSize(TypedValue.COMPLEX_UNIT_PX,previousSize);
-                if(positionOffset < 0.5){
-                    previous.setTypeface(null, Typeface.BOLD);
-                    previous.setTextColor(textColorSelect);
-                    current.setTypeface(null,Typeface.NORMAL);
-                    current.setTextColor(textColor);
-                }else{
-                    current.setTypeface(null, Typeface.BOLD);
-                    current.setTextColor(textColorSelect);
-                    previous.setTypeface(null,Typeface.NORMAL);
-                    previous.setTextColor(textColor);
-                }
+            }else{
+                //选中时
+                current.setTextSize(TypedValue.COMPLEX_UNIT_PX,selectedSize);
+                current.setTypeface(null, Typeface.BOLD);
+                current.setTextColor(textColorSelect);
             }
-        }else{
-            //选中时
-            current.setTextSize(TypedValue.COMPLEX_UNIT_PX,selectedSize);
-            current.setTypeface(null, Typeface.BOLD);
-            current.setTextColor(textColorSelect);
         }
-
-
 
     }
 
