@@ -41,7 +41,9 @@ public class ActivityDelegateImpl implements ActivityDelegate{
         List<FragmentManager.FragmentLifecycleCallbacks> fragmentLifecycleCallbackList
                 = BaseApplication.fragmentLifecycleCallbacksList;
         for(FragmentManager.FragmentLifecycleCallbacks fragmentLifecycleCallbacks:fragmentLifecycleCallbackList){
-            ((AppCompatActivity)activity).getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks,true);
+            if(activity instanceof AppCompatActivity){
+                ((AppCompatActivity)this.activity).getSupportFragmentManager().registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks,true);
+            }
         }
     }
 

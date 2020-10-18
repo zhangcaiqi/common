@@ -1,5 +1,7 @@
 package com.xingqi.code.common.mvp.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Button;
 
@@ -22,10 +24,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
+    @BindView(R.id.btn_send_sms)
+    Button btnSendSms;
+
     @Override
     public int statusBarColor() {
         return R.color.colorPrimary;
     }
+
     @BindView(R.id.send_msg_btn)
     Button sendMsgBtn;
     @BindView(R.id.jump_to_page)
@@ -141,5 +147,15 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.jump_to_page_food)
     public void jumpToPageFood() {
         CommonUtils.startActivity(FoodListActivity.class);
+    }
+
+    @OnClick(R.id.btn_send_sms)
+    public void onSendSms() {
+        Uri smsToUri = Uri.parse("smsto:");
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW, smsToUri);
+        sendIntent.putExtra("address", "123456"); //电话号码，这行去掉的话，默认就没有电话
+        sendIntent.putExtra("sms_body","短信内容");
+        sendIntent.setType("vnd.android-dir/mms-sms");
+        startActivity(sendIntent);
     }
 }
