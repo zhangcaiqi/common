@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
-    private Context context;
+    protected Context context;
     private List<T> dataList = new ArrayList<>();
 
     public BaseAdapter(Context context) {
