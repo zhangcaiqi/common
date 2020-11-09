@@ -5,6 +5,9 @@ import androidx.fragment.app.FragmentManager;
 import com.xingqi.code.common.app.GlobalHttpHandlerImpl;
 import com.xingqi.code.commonlib.base.BaseApplication;
 import com.xingqi.code.commonlib.http.GlobalHttpHandler;
+import com.xingqi.code.commonlib.imageloader.BaseImageLoaderStrategy;
+import com.xingqi.code.commonlib.imageloader.glide.GlideImageLoaderStrategy;
+import com.xingqi.code.commonlib.imageloader.glide.ImageConfigImpl;
 
 import java.util.List;
 
@@ -49,6 +52,11 @@ public class App extends BaseApplication {
     @Override
     protected int unifyStatusBarColor() {
         return R.color.red;
+    }
+
+    @Override
+    protected BaseImageLoaderStrategy<ImageConfigImpl> imageLoaderStrategy() {
+        return new GlideImageLoaderStrategy();
     }
 
 

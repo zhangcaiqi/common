@@ -16,19 +16,21 @@ public interface CommonContract {
             return null;
         }
 
-        default void addData(String jsonData){}
-
-        default void addSingleFileData(MultipartBody.Part part, String jsonData){
-
+        default Observable<BaseResult> addData(String jsonData){
+            return null;
         }
 
-        default void addMultiFileData(MultipartBody.Part[] parts, String jsonData){
-
+        default Observable<BaseResult> addSingleFileData(MultipartBody.Part part, String jsonData){
+            return null;
         }
 
-        default void editData(Object... cdt){}
+        default Observable<BaseResult> addMultiFileData(MultipartBody.Part[] parts, String jsonData){
+            return null;
+        }
 
-        default void deleteData(Object... cdt){}
+        default Observable<BaseResult> editData(Object... cdt){ return null;}
+
+        default Observable<BaseResult> deleteData(Object... cdt){ return null;}
 
     }
 
