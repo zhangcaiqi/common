@@ -2,6 +2,8 @@ package com.xingqi.code.commonlib.mvp;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Part;
 
 public interface CommonContract {
 
@@ -20,11 +22,11 @@ public interface CommonContract {
             return null;
         }
 
-        default Observable<BaseResult> addSingleFileData(MultipartBody.Part part, String jsonData){
+        default Observable<BaseResult> addSingleFileData(MultipartBody.Part part,  RequestBody data){
             return null;
         }
 
-        default Observable<BaseResult> addMultiFileData(MultipartBody.Part[] parts, String jsonData){
+        default Observable<BaseResult> addMultiFileData(MultipartBody.Part[] parts, RequestBody data){
             return null;
         }
 
