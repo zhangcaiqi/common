@@ -31,8 +31,10 @@ public class LoadingDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Dialog dlg = new Dialog(getContext(),R.style.CustomProgressDialog);
+
         dlg.setCancelable(false);
-//        dlg.setCanceledOnTouchOutside(true);
+        dlg.setCanceledOnTouchOutside(false);
+
         return dlg;
     }
 
