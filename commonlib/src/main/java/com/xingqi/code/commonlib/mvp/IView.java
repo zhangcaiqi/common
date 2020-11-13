@@ -13,4 +13,8 @@ public interface IView {
     default void hideLoading() {
 
     }
+
+    default void noPermission(String msg){
+
+    }
 }
