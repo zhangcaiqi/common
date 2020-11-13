@@ -30,7 +30,7 @@ public class LoadingDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        Dialog dlg = new Dialog(getContext(),R.style.CustomProgressDialog);
+        Dialog dlg = new Dialog(getContext(),R.style.LoadingDialogStyle);
 
         dlg.setCancelable(false);
         dlg.setCanceledOnTouchOutside(false);
@@ -47,7 +47,7 @@ public class LoadingDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_custom_progress, null);
+        View view = inflater.inflate(R.layout.dialog_loading, null);
         TextView textView = view.findViewById(R.id.tv_message);
         Bundle bundle = getArguments();
         if(null != bundle){

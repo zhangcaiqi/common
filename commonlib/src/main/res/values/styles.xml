@@ -8,7 +8,7 @@
         <item name="shadow_right">@drawable/shadow_right</item>
         <item name="shadow_bottom">@drawable/shadow_bottom</item>
     </style>
-    <style name="CustomProgressDialog" parent="@android:style/Theme.Dialog">
+    <style name="LoadingDialogStyle" parent="@android:style/Theme.Dialog">
         <!-- Dialog的windowFrame框为无 -->
         <item name="android:windowFrame">@null</item>
         <!-- 是否浮现在activity之上 -->
