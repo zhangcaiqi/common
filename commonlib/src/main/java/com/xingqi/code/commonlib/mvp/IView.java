@@ -14,7 +14,7 @@ public interface IView {
 
     }
 
-    default void noPermission(String msg){
+    default void onNoPermission(String msg){
 
     }
 }
