@@ -7,6 +7,8 @@ public class BasePageResult<T> {
 
     public int code;
 
+    public String message;
+
     public Data<T> data;
 
     public class Data<T>{
