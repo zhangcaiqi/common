@@ -3,11 +3,8 @@ package com.xingqi.code.commonlib.mvp;
 
 import java.util.List;
 
-public class BasePageResult<T> {
+public class BasePageResult<T> extends Result{
 
-    public int code;
-
-    public String message;
 
     public Data<T> data;
 

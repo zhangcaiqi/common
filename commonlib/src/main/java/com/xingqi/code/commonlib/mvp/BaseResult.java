@@ -1,20 +1,9 @@
 package com.xingqi.code.commonlib.mvp;
 
-public class BaseResult<T> {
+public class BaseResult<T> extends Result{
 
-    private int code;
 
     private T data;
-
-    private String message;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public T getData() {
         return data;
@@ -24,11 +13,4 @@ public class BaseResult<T> {
         this.data = data;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }
