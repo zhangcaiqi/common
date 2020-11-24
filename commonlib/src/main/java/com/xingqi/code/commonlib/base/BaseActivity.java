@@ -80,7 +80,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     private CompositeDisposable mCompositeDisposable;
 
-    protected void addDisposable(Disposable disposable) {
+    public void addDisposable(Disposable disposable) {
         if (null == mCompositeDisposable) {
             mCompositeDisposable = new CompositeDisposable();
         }
