@@ -2,6 +2,8 @@ package com.xingqi.code.commonlib.mvp;
 
 import androidx.annotation.NonNull;
 
+import io.reactivex.disposables.Disposable;
+
 public interface IView {
 
     void showMessage(@NonNull String message);
@@ -15,6 +17,10 @@ public interface IView {
     }
 
     default void onNoPermission(String msg){
+
+    }
+
+    default void OnAddDisposable(Disposable d){
 
     }
 }
