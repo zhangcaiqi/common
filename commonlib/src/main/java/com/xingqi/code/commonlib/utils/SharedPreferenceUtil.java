@@ -67,6 +67,8 @@ public class SharedPreferenceUtil {
             value = sharedPreferences.getFloat(key, (Float) defaultValue);
         } else if (clazz.equals(Boolean.class)) {
             value = sharedPreferences.getBoolean(key, (Boolean) defaultValue);
+        }else if(clazz.equals(Long.class)){
+            value = sharedPreferences.getLong(key,(Long)defaultValue);
         }
         t = (T) value;
         return t;
