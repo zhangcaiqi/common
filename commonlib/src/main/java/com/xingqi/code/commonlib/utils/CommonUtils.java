@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.xingqi.code.commonlib.R;
 import com.xingqi.code.commonlib.manager.AppManager;
 
 import java.nio.charset.StandardCharsets;
@@ -72,10 +73,10 @@ public class CommonUtils {
                 res));
         // 新建一个属性对象,设置文字的大小
         AbsoluteSizeSpan ass = new AbsoluteSizeSpan(size, true);
-        // 附加属性到文本  
+        // 附加属性到文本
         ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        // 设置hint  
+        // 设置hint
         v.setHint(new SpannedString(ss)); // 一定要进行转换,否则属性会消失
     }
 
@@ -298,7 +299,22 @@ public class CommonUtils {
     public static void startActivity(Activity activity, Intent intent) {
         activity.startActivity(intent);
     }
+    public static void startActivityWithTransition(Class<?> targetClass,Bundle bundle,
+                                            int pageEnterAnim,int pageExitAnim){
+        AppManager.getAppManager().startActivityWithTransition(targetClass,bundle,pageEnterAnim, pageExitAnim);
+    }
 
+    public static void startActivityWithTransition(Class<?> targetClass){
+        AppManager.getAppManager().startActivityWithTransition(targetClass);
+    }
+
+    public static void startActivityWithTransition(Class<?> targetClass,Bundle bundle){
+        AppManager.getAppManager().startActivityWithTransition(targetClass,bundle);
+    }
+
+    public static void startActivityWithTransition(Class<?> targetClass,int pageEnterAnim,int pageExitAnim){
+        AppManager.getAppManager().startActivityWithTransition(targetClass,pageEnterAnim,pageExitAnim);
+    }
     /**
      * 获得屏幕的宽度
      *
@@ -313,7 +329,7 @@ public class CommonUtils {
      *
      * @return
      */
-    public static int getScreenHeidth(Context context) {
+    public static int getScreenHeight(Context context) {
         return getResources(context).getDisplayMetrics().heightPixels;
     }
 

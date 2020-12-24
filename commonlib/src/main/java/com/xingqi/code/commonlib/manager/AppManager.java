@@ -16,27 +16,20 @@
 package com.xingqi.code.commonlib.manager;
 
 import android.app.Activity;
-import android.app.Application;
-import android.app.Dialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 
 
+import com.xingqi.code.commonlib.R;
 import com.xingqi.code.commonlib.base.BaseApplication;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import io.reactivex.Completable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
 public final class AppManager {
@@ -87,7 +80,39 @@ public final class AppManager {
             return;
         }
         getTopActivity().startActivity(intent);
+
+
+
     }
+
+    public void startActivityWithTransition(Class<?> targetClass,Bundle bundle,
+                                            int pageEnterAnim,int pageExitAnim){
+        Intent intent = new Intent(context,targetClass);
+        if(null != bundle){
+            intent.putExtras(bundle);
+        }
+        Activity currentActivity = getCurrentActivity();
+        startActivity(intent);
+        if(null != currentActivity){
+            currentActivity.overridePendingTransition(pageEnterAnim,
+                    pageExitAnim);
+        }
+    }
+
+    public void startActivityWithTransition(Class<?> targetClass){
+        startActivityWithTransition(targetClass,null,R.anim.page_enter,R.anim.page_exit);
+    }
+
+    public void startActivityWithTransition(Class<?> targetClass,Bundle bundle){
+        startActivityWithTransition(targetClass,bundle,R.anim.page_enter,R.anim.page_exit);
+    }
+
+    public void startActivityWithTransition(Class<?> targetClass,int pageEnterAnim,int pageExitAnim){
+        startActivityWithTransition(targetClass,null,pageEnterAnim,pageExitAnim);
+    }
+
+
+
 
     /**
      * 让在栈顶的 {@link Activity} ,打开指定的 {@link Activity}

@@ -120,7 +120,9 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
 
     @OnClick(R.id.jump_to_complex)
     public void jumpToComplex() {
-        CommonUtils.startActivity(ComplexActivity.class);
+//        CommonUtils.startActivity(ComplexActivity.class);
+
+        CommonUtils.startActivityWithTransition(ComplexActivity.class);
     }
 
     @OnClick(R.id.jump_to_image)

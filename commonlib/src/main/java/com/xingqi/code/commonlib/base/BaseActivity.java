@@ -10,7 +10,6 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.xingqi.code.commonlib.R;
 import com.xingqi.code.commonlib.entity.EventMessage;
 import com.xingqi.code.commonlib.mvp.BasePresenter;
-import com.xingqi.code.commonlib.rx.RxUtil;
 import com.xingqi.code.commonlib.rxlifecycle.ActivityLifecycleable;
 import com.xingqi.code.commonlib.swipeback.SwipeBackActivityHelper;
 import com.xingqi.code.commonlib.swipeback.SwipeBackLayout;
@@ -159,6 +158,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             exitAfterTwice();
         }else{
             super.onBackPressed();
+            overridePendingTransition(resumeAnim(),finishAnim());
         }
 
     }
@@ -176,4 +176,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         return mLifecycleSubject;
     }
 
+    @Override
+    public int finishAnim() {
+        return R.anim.page_finish;
+    }
+
+    @Override
+    public int resumeAnim() {
+        return R.anim.page_resume;
+    }
 }
