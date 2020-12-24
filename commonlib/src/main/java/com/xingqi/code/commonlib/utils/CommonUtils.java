@@ -436,4 +436,9 @@ public class CommonUtils {
         AppManager.getAppManager().appExit();
     }
 
+
+    public static void finish(){
+        AppManager.getAppManager().finish();
+    }
+
 }

@@ -371,4 +371,12 @@ public final class AppManager {
         }
     }
 
+    public void finish() {
+        Activity topActivity = getTopActivity();
+        if(null != topActivity){
+            topActivity.onBackPressed();
+        }
+    }
+
+
 }
