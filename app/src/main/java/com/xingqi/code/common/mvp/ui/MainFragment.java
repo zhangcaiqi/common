@@ -26,6 +26,8 @@ import butterknife.OnClick;
 public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
     @BindView(R.id.btn_send_sms)
     Button btnSendSms;
+    @BindView(R.id.btn_toolbar_sample)
+    Button btnToolbarSimple;
 
     @Override
     public int statusBarColor() {
@@ -156,8 +158,13 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
         Uri smsToUri = Uri.parse("smsto:");
         Intent sendIntent = new Intent(Intent.ACTION_VIEW, smsToUri);
         sendIntent.putExtra("address", "123456"); //电话号码，这行去掉的话，默认就没有电话
-        sendIntent.putExtra("sms_body","短信内容");
+        sendIntent.putExtra("sms_body", "短信内容");
         sendIntent.setType("vnd.android-dir/mms-sms");
         startActivity(sendIntent);
+    }
+
+    @OnClick(R.id.btn_toolbar_sample)
+    public void jumpToToolbarSample() {
+        CommonUtils.startActivityWithTransition(ToolbarSimpleActivity.class);
     }
 }

@@ -51,7 +51,7 @@ public class App extends BaseApplication {
 
     @Override
     protected int unifyStatusBarColor() {
-        return R.color.red;
+        return R.color.colorPrimaryDark;
     }
 
     @Override
