@@ -34,15 +34,6 @@ public class FragmentFive extends BaseFragment<HotKeyWordPresenter> implements H
     }
 
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @Override
     public void showKeyWord(List<HotKeyWord> hotKeyWordList) {
@@ -62,9 +53,5 @@ public class FragmentFive extends BaseFragment<HotKeyWordPresenter> implements H
     @Override
     public void hideLoading() {
         LoadingDialogManager.getInstance().hideLoading();
-    }
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
     }
 }

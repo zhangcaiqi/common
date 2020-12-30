@@ -3,15 +3,19 @@ package com.xingqi.code.common.mvp.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.xingqi.code.common.R;
 import com.xingqi.code.common.mvp.contract.HotKeyWordContract;
 import com.xingqi.code.common.mvp.model.HotKeyWordModel;
 import com.xingqi.code.common.mvp.model.entity.HotKeyWord;
 import com.xingqi.code.common.mvp.presenter.HotKeyWordPresenter;
+import com.xingqi.code.commonlib.annotation.ToolbarConfig;
 import com.xingqi.code.commonlib.base.BaseFragment;
 import com.xingqi.code.commonlib.entity.EventMessage;
 import com.xingqi.code.commonlib.manager.LoadingDialogManager;
@@ -23,16 +27,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+@ToolbarConfig(title = "首页",hasOptionMenu = true)
 public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
     @BindView(R.id.btn_send_sms)
     Button btnSendSms;
     @BindView(R.id.btn_toolbar_sample)
     Button btnToolbarSimple;
 
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
-    }
 
     @BindView(R.id.send_msg_btn)
     Button sendMsgBtn;
@@ -64,19 +65,12 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
 
     @Override
     public void initData() {
+        Toolbar toolbar = getToolbar();
+        toolbar.setNavigationIcon(null);
         mPresenter.getHotWordList();
     }
 
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @OnClick(R.id.send_msg_btn)
     public void onViewClicked() {
@@ -86,6 +80,11 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @Override
     protected HotKeyWordPresenter initPresenter() {
         return new HotKeyWordPresenter(new HotKeyWordModel(), this);
+    }
+
+    @Override
+    public boolean isSetAppBarStyle() {
+        return true;
     }
 
     @Override
@@ -166,5 +165,12 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.btn_toolbar_sample)
     public void jumpToToolbarSample() {
         CommonUtils.startActivityWithTransition(ToolbarSimpleActivity.class);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main_menu,menu);
+
     }
 }

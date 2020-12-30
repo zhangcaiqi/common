@@ -89,17 +89,4 @@ public class IndicatorActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
-    }
 }

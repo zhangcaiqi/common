@@ -9,15 +9,7 @@ public abstract class SimpleFragment<P extends BasePresenter> extends BaseFragme
 
     }
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
 
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @Override
     public void release() {

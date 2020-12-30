@@ -1,5 +1,6 @@
 package com.xingqi.code.commonlib.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,13 +9,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.xingqi.code.commonlib.R;
+import com.xingqi.code.commonlib.annotation.ToolbarConfig;
 import com.xingqi.code.commonlib.entity.EventMessage;
 import com.xingqi.code.commonlib.mvp.BasePresenter;
 import com.xingqi.code.commonlib.rxlifecycle.FragmentLifecycleable;
+import com.xingqi.code.commonlib.utils.ToolbarUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -27,6 +32,7 @@ import io.reactivex.subjects.Subject;
 public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IFragment, FragmentLifecycleable {
     protected P mPresenter;
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
+    private Toolbar toolbar;
     public static <T extends BaseFragment> T getInstance(Bundle bundle,Class<T> fragmentClass){
         try {
             T t = fragmentClass.newInstance();
@@ -63,6 +69,23 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(isSetAppBarStyle()){
+            Activity activity = getActivity();
+            if(activity instanceof AppCompatActivity){
+                toolbar = ToolbarUtil.initToolbar(this.getClass(), (AppCompatActivity) activity);
+            }
+            ToolbarConfig toolbarConfig = ToolbarUtil.getToolbarConfig(this.getClass());
+            if(null != toolbarConfig){
+                boolean hasOptionMenu = toolbarConfig.hasOptionMenu();
+                setHasOptionsMenu(hasOptionMenu);
+            }
+        }
+
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(),container,false);
         return view;
@@ -91,36 +114,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public Context getOwnContext(){
         return getActivity();
     }
-    @Override
-    public int toolbarColor() {
-        return R.color.colorPrimary;
-    }
 
-    @Override
-    public int statusBarColor() {
-        BaseApplication app = (BaseApplication) getActivity().getApplication();
-        return app.unifyStatusBarColor();
-    }
 
-    @Override
-    public boolean displayNavigateIcon() {
-        return true;
-    }
-
-    @Override
-    public int navigateIconRes() {
-        return R.drawable.ic_fanhui;
-    }
-
-    @Override
-    public boolean darkStatusBarText() {
-        return false;
-    }
-
-    @Override
-    public void onNavigateClick() {
-        getActivity().onBackPressed();
-    }
 
     @Override
     public final Subject<FragmentEvent> provideLifecycleSubject() {
@@ -130,5 +125,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public boolean isSetAppBarStyle() {
         return false;
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

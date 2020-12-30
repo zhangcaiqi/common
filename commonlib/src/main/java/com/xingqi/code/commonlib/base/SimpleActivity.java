@@ -11,15 +11,7 @@ public abstract class SimpleActivity<P extends BasePresenter> extends BaseActivi
 
 
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
 
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @Override
     public void release() {

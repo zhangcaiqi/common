@@ -26,10 +26,6 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<HotKeyWordPresenter> implements HotKeyWordContract.View {
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
-    }
     private static final String TAG = "MainActivity";
     @BindView(R.id.text_view)
     TextView textView;
@@ -82,10 +78,6 @@ public class MainActivity extends BaseActivity<HotKeyWordPresenter> implements H
         return new HotKeyWordPresenter(new HotKeyWordModel(), this);
     }
 
-    @Override
-    public boolean displayNavigateIcon() {
-        return false;
-    }
 
     @Override
     public boolean isRootPage() {
@@ -111,15 +103,6 @@ public class MainActivity extends BaseActivity<HotKeyWordPresenter> implements H
     }
 
 
-    @Override
-    public boolean hasToolbar() {
-        return true;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return "ceshi";
-    }
 
     @Override
     public void showKeyWord(List<HotKeyWord> hotKeyWordList) {

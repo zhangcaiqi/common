@@ -59,15 +59,6 @@ public class FoodListActivity extends BaseActivity<FoodPresenter> implements Foo
         mPresenter.findFoodPage(true,1,pageSize);
     }
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @Override
     public void release() {
@@ -87,9 +78,5 @@ public class FoodListActivity extends BaseActivity<FoodPresenter> implements Foo
     @Override
     public void onLoadMore(int page, int pageSize) {
         mPresenter.findFoodPage(false,page,pageSize);
-    }
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
     }
 }

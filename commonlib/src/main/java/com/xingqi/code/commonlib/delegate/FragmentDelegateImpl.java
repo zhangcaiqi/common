@@ -6,13 +6,13 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.xingqi.code.commonlib.base.DefaultAppStyleImpl;
-import com.xingqi.code.commonlib.base.IAppStyle;
 import com.xingqi.code.commonlib.base.IFragment;
 import com.xingqi.code.commonlib.utils.EventBusUtil;
+import com.xingqi.code.commonlib.utils.ToolbarUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -36,23 +36,10 @@ public class FragmentDelegateImpl implements FragmentDelegate {
             return;
         }
 
-        Activity activity = fragment.getActivity();
-        IAppStyle iAppStyle = new DefaultAppStyleImpl.Builder(activity)
-                .darkStatusBarText(iFragment.darkStatusBarText())
-                .displayNavigateIcon(iFragment.displayNavigateIcon())
-                .hasToolbar(iFragment.hasToolbar())
-                .statusBarColor(iFragment.statusBarColor())
-                .navigateIconRes(iFragment.navigateIconRes())
-                .toolbarTitle(iFragment.toolbarTitle())
-                .toolbarColor(iFragment.toolbarColor())
-                .listener((v -> {iFragment.onNavigateClick();}))
-                .build();
-        if(iFragment.isSetAppBarStyle()){
-            iAppStyle.setAppBarStyle();
-        }
         if (iFragment.registerEventBus()) {
             EventBusUtil.register(fragment);
         }
+
     }
 
     @Override

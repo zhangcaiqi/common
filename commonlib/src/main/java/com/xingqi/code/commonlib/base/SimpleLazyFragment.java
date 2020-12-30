@@ -9,15 +9,6 @@ public abstract class SimpleLazyFragment<P extends BasePresenter> extends BaseLa
 
     }
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @Override
     public void release() {

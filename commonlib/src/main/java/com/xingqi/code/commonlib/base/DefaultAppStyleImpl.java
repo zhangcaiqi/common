@@ -11,35 +11,29 @@ import com.xingqi.code.commonlib.utils.StatusBarUtil;
 
 public class DefaultAppStyleImpl implements IAppStyle{
 
-    private boolean hasToolbar;
     private int toolbarColor ;
     private int statusBarColor;
     private boolean darkStatusBarText ;
     private String toolbarTitle ;
-    private boolean displayNavigateIcon;
     private int navigateIconRes;
     private Activity activity;
     private View.OnClickListener listener;
 
     public DefaultAppStyleImpl(Builder builder){
-        this.hasToolbar = builder.hasToolbar;
         this.toolbarColor = builder.toolbarColor;
         this.statusBarColor = builder.statusBarColor;
         this.darkStatusBarText = builder.darkStatusBarText;
         this.toolbarTitle = builder.toolbarTitle;
-        this.displayNavigateIcon = builder.displayNavigateIcon;
         this.navigateIconRes = builder.navigateIconRes;
         this.activity = builder.activity;
         this.listener = builder.listener;
     }
 
     private void setupStatusBar() {
-        if(hasToolbar){
-            StatusBarUtil.setStatusBarColor(activity,toolbarColor);
-        }else{
-            StatusBarUtil.setTranslucentStatus(activity);
-            StatusBarUtil.setStatusBarColor(activity,statusBarColor);
-        }
+
+        StatusBarUtil.setTranslucentStatus(activity);
+        StatusBarUtil.setStatusBarColor(activity,statusBarColor);
+
         if(darkStatusBarText){
             StatusBarUtil.setDarkText(activity);
         }
@@ -55,7 +49,7 @@ public class DefaultAppStyleImpl implements IAppStyle{
         appCompatActivity.setSupportActionBar(toolbar);
         ((AppCompatActivity) activity).getSupportActionBar().setTitle(toolbarTitle);
         toolbar.setBackground(activity.getDrawable(toolbarColor));
-        if(displayNavigateIcon){
+        if(navigateIconRes != 0){
             toolbar.setNavigationIcon(navigateIconRes);
             toolbar.setNavigationOnClickListener(listener);
         }
@@ -65,10 +59,8 @@ public class DefaultAppStyleImpl implements IAppStyle{
     @Override
     public void setAppBarStyle() {
         setupStatusBar();
-        if(hasToolbar){
-            //设置工具栏
-            setupToolbar();
-        }
+        //设置工具栏
+        setupToolbar();
     }
     public static class Builder{
 
@@ -77,19 +69,13 @@ public class DefaultAppStyleImpl implements IAppStyle{
         }
 
         private Activity activity;
-        private boolean hasToolbar;
         private int statusBarColor;
         private int toolbarColor;
         private boolean darkStatusBarText;
         private String toolbarTitle;
-        private boolean displayNavigateIcon;
         private int navigateIconRes;
         private View.OnClickListener listener;
 
-        public Builder hasToolbar(boolean hasToolbar) {
-            this.hasToolbar = hasToolbar;
-            return this;
-        }
 
         public Builder toolbarColor(int toolbarColor) {
             this.toolbarColor = toolbarColor;
@@ -106,10 +92,6 @@ public class DefaultAppStyleImpl implements IAppStyle{
             return this;
         }
 
-        public Builder displayNavigateIcon(boolean displayNavigateIcon) {
-            this.displayNavigateIcon = displayNavigateIcon;
-            return this;
-        }
 
         public Builder navigateIconRes(int navigateIconRes) {
             this.navigateIconRes = navigateIconRes;

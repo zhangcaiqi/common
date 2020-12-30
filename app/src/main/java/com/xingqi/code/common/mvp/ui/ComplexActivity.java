@@ -63,14 +63,5 @@ public class ComplexActivity extends BaseActivity {
     }
 
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
 }

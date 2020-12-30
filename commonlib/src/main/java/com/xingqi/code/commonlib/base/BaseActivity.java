@@ -2,8 +2,11 @@ package com.xingqi.code.commonlib.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -14,6 +17,7 @@ import com.xingqi.code.commonlib.rxlifecycle.ActivityLifecycleable;
 import com.xingqi.code.commonlib.swipeback.SwipeBackActivityHelper;
 import com.xingqi.code.commonlib.swipeback.SwipeBackLayout;
 import com.xingqi.code.commonlib.utils.CommonUtils;
+import com.xingqi.code.commonlib.utils.ToolbarUtil;
 import com.xingqi.code.commonlib.utils.ScreenUtil;
 import com.xingqi.code.commonlib.utils.ToastUtil;
 
@@ -26,11 +30,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
-
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IActivity, ActivityLifecycleable {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity
+        implements IActivity, ActivityLifecycleable , Toolbar.OnMenuItemClickListener {
     protected P mPresenter;
     private SwipeBackActivityHelper mHelper;
     private Unbinder mUnbinder;
+    private Toolbar toolbar;
     private final BehaviorSubject<ActivityEvent> mLifecycleSubject = BehaviorSubject.create();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +46,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         mHelper.onActivityCreate();
         //设置侧滑返回
         setUpSwipeBack();
-        IAppStyle iAppStyle = new DefaultAppStyleImpl.Builder(this)
-                .darkStatusBarText(darkStatusBarText())
-                .displayNavigateIcon(displayNavigateIcon())
-                .hasToolbar(hasToolbar())
-                .statusBarColor(statusBarColor())
-                .navigateIconRes(navigateIconRes())
-                .toolbarTitle(toolbarTitle())
-                .toolbarColor(toolbarColor())
-                .listener((v -> {onNavigateClick();}))
-                .build();
-        //设置状态栏
-        iAppStyle.setAppBarStyle();
+        //使用注解配置页面
+        toolbar = ToolbarUtil.initToolbar(this.getClass(),this);
         mPresenter = initPresenter();
         initData();
     }
+
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onReceiveEvent(EventMessage event) {
     }
@@ -106,36 +103,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     public Context getOwnContext(){
         return this;
     }
-    @Override
-    public int toolbarColor() {
-        return R.color.colorPrimary;
-    }
 
-    @Override
-    public int statusBarColor() {
-        BaseApplication app = (BaseApplication) getApplication();
-        return app.unifyStatusBarColor();
-    }
 
-    @Override
-    public boolean displayNavigateIcon() {
-        return true;
-    }
 
-    @Override
-    public int navigateIconRes() {
-        return R.drawable.ic_fanhui;
-    }
 
-    @Override
-    public boolean darkStatusBarText() {
-        return false;
-    }
-
-    @Override
-    public void onNavigateClick() {
-        onBackPressed();
-    }
     protected boolean isSupportSwipeBack(){
         if(!isRootPage()){
             return true;
@@ -162,6 +133,18 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
     private long exitTime = 0;
     private void exitAfterTwice(){
         if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -184,5 +167,18 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     public int resumeAnim() {
         return R.anim.page_resume;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+        }
+        return false;
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

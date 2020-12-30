@@ -12,27 +12,9 @@ public interface IPage {
 
     boolean registerEventBus();
 
-
-    boolean hasToolbar();
-
-    String toolbarTitle();
-
-    int toolbarColor();
-
-    int statusBarColor();
-
-    boolean displayNavigateIcon();
-
-    int navigateIconRes();
-
-    boolean darkStatusBarText();
-
-    void onNavigateClick();
-
     void release();
 
     void disposable();
-
 
 
     Context getOwnContext();

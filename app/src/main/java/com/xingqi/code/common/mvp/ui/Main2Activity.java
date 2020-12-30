@@ -54,15 +54,6 @@ public class Main2Activity extends BaseActivity<HotKeyWordPresenter> implements 
     }
 
 
-    @Override
-    public boolean hasToolbar() {
-        return false;
-    }
-
-    @Override
-    public String toolbarTitle() {
-        return null;
-    }
 
     @Override
     public void release() {
@@ -93,9 +84,5 @@ public class Main2Activity extends BaseActivity<HotKeyWordPresenter> implements 
     @Override
     public  void hideLoading() {
         LoadingDialogManager.getInstance().hideLoading();
-    }
-    @Override
-    public int statusBarColor() {
-        return R.color.colorPrimary;
     }
 }
