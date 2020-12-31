@@ -79,6 +79,17 @@
                 android:layout_height="wrap_content"
                 android:text="material toolbar"
                 />
+            <Button
+                android:id="@+id/btn_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Material TabLayout"
+                />
+            <Button
+                android:id="@+id/btn_drawer_layout_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DrawerLayout and NavigationView"/>
         </LinearLayout>
 
     </ScrollView>

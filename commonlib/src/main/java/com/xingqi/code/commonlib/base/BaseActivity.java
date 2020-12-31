@@ -67,6 +67,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     @Override
+    public void release() {
+
+    }
+
+    @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mHelper.onPostCreate();
@@ -157,6 +162,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     public final Subject<ActivityEvent> provideLifecycleSubject() {
         return mLifecycleSubject;
+    }
+
+    @Override
+    public boolean isRootPage() {
+        return false;
     }
 
     @Override

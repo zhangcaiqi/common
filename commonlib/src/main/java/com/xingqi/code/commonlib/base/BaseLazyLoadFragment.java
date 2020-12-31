@@ -30,4 +30,8 @@ public abstract class BaseLazyLoadFragment<P extends BasePresenter> extends Base
     }
     public abstract void lazyLoad();
 
+    @Override
+    public void initData() {
+
+    }
 }

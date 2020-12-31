@@ -18,16 +18,16 @@ import com.xingqi.code.common.mvp.presenter.HotKeyWordPresenter;
 import com.xingqi.code.commonlib.annotation.ToolbarConfig;
 import com.xingqi.code.commonlib.base.BaseFragment;
 import com.xingqi.code.commonlib.entity.EventMessage;
-import com.xingqi.code.commonlib.manager.LoadingDialogManager;
 import com.xingqi.code.commonlib.utils.CommonUtils;
 import com.xingqi.code.commonlib.utils.EventBusUtil;
+import com.xingqi.code.commonlib.utils.LoadingDialogUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-@ToolbarConfig(title = "首页",hasOptionMenu = true)
+@ToolbarConfig(title = "首页", hasOptionMenu = true)
 public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
     @BindView(R.id.btn_send_sms)
     Button btnSendSms;
@@ -51,6 +51,10 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     Button jumpToOption;
     @BindView(R.id.jump_to_page_food)
     Button jumpToPageFood;
+    @BindView(R.id.btn_tab_layout)
+    Button btnTabLayout;
+    @BindView(R.id.btn_drawer_layout_navigation)
+    Button btnDrawerLayoutNavigation;
 
     @Override
     public int getLayoutId() {
@@ -69,7 +73,6 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
         toolbar.setNavigationIcon(null);
         mPresenter.getHotWordList();
     }
-
 
 
     @OnClick(R.id.send_msg_btn)
@@ -103,14 +106,12 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
 
     @Override
     public void showLoading() {
-
-        LoadingDialogManager.getInstance().showLoading(getActivity().getSupportFragmentManager());
-
+        LoadingDialogUtil.showLoading(getActivity().getSupportFragmentManager());
     }
 
     @Override
     public void hideLoading() {
-        LoadingDialogManager.getInstance().hideLoading();
+        LoadingDialogUtil.hideLoading(getActivity().getSupportFragmentManager());
     }
 
 
@@ -170,7 +171,17 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.main_menu,menu);
+        inflater.inflate(R.menu.main_menu, menu);
 
+    }
+
+    @OnClick(R.id.btn_tab_layout)
+    public void jumpToTabLayout() {
+        CommonUtils.startActivityWithTransition(TabLayoutActivity.class);
+    }
+
+    @OnClick(R.id.btn_drawer_layout_navigation)
+    public void jumpToDrawerLayout() {
+        CommonUtils.startActivityWithTransition(DrawerNavActivity.class);
     }
 }

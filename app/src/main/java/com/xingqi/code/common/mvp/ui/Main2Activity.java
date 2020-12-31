@@ -11,8 +11,8 @@ import com.xingqi.code.common.mvp.model.HotKeyWordModel;
 import com.xingqi.code.common.mvp.model.entity.HotKeyWord;
 import com.xingqi.code.common.mvp.presenter.HotKeyWordPresenter;
 import com.xingqi.code.commonlib.base.BaseActivity;
-import com.xingqi.code.commonlib.manager.LoadingDialogManager;
 import com.xingqi.code.commonlib.utils.CommonUtils;
+import com.xingqi.code.commonlib.utils.LoadingDialogUtil;
 
 import java.util.List;
 
@@ -75,14 +75,12 @@ public class Main2Activity extends BaseActivity<HotKeyWordPresenter> implements 
 
     }
     @Override
-    public  void showLoading() {
-
-        LoadingDialogManager.getInstance().showLoading(getSupportFragmentManager());
-
+    public void showLoading() {
+        LoadingDialogUtil.showLoading(getSupportFragmentManager());
     }
 
     @Override
-    public  void hideLoading() {
-        LoadingDialogManager.getInstance().hideLoading();
+    public void hideLoading() {
+        LoadingDialogUtil.hideLoading(getSupportFragmentManager());
     }
 }

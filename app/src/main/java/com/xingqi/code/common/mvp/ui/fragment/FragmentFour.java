@@ -7,12 +7,12 @@ import com.xingqi.code.common.mvp.contract.HotKeyWordContract;
 import com.xingqi.code.common.mvp.model.HotKeyWordModel;
 import com.xingqi.code.common.mvp.model.entity.HotKeyWord;
 import com.xingqi.code.common.mvp.presenter.HotKeyWordPresenter;
-import com.xingqi.code.commonlib.base.BaseFragment;
-import com.xingqi.code.commonlib.manager.LoadingDialogManager;
+import com.xingqi.code.commonlib.base.BaseLazyLoadFragment;
+import com.xingqi.code.commonlib.utils.LoadingDialogUtil;
 
 import java.util.List;
 
-public class FragmentFour extends BaseFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
+public class FragmentFour extends BaseLazyLoadFragment<HotKeyWordPresenter> implements HotKeyWordContract.View {
     @Override
     protected HotKeyWordPresenter initPresenter() {
         return new HotKeyWordPresenter(new HotKeyWordModel(), this);
@@ -30,7 +30,7 @@ public class FragmentFour extends BaseFragment<HotKeyWordPresenter> implements H
 
     @Override
     public void initData() {
-        mPresenter.getHotWordList();
+
     }
 
 
@@ -47,11 +47,16 @@ public class FragmentFour extends BaseFragment<HotKeyWordPresenter> implements H
 
     @Override
     public void showLoading() {
-        LoadingDialogManager.getInstance().showLoading(getActivity().getSupportFragmentManager());
+        LoadingDialogUtil.showLoading(getActivity().getSupportFragmentManager());
     }
 
     @Override
     public void hideLoading() {
-        LoadingDialogManager.getInstance().hideLoading();
+        LoadingDialogUtil.hideLoading(getActivity().getSupportFragmentManager());
+    }
+
+    @Override
+    public void lazyLoad() {
+        mPresenter.getHotWordList();
     }
 }

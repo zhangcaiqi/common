@@ -15,9 +15,9 @@ import com.xingqi.code.common.mvp.model.entity.HotKeyWord;
 import com.xingqi.code.common.mvp.presenter.HotKeyWordPresenter;
 import com.xingqi.code.commonlib.base.BaseActivity;
 import com.xingqi.code.commonlib.entity.EventMessage;
-import com.xingqi.code.commonlib.manager.LoadingDialogManager;
 import com.xingqi.code.commonlib.rx.ResponseException;
 import com.xingqi.code.commonlib.rx.RxErrorHandler;
+import com.xingqi.code.commonlib.utils.LoadingDialogUtil;
 import com.xingqi.code.commonlib.utils.PermissionUtil;
 import com.xingqi.code.commonlib.utils.ToastUtil;
 
@@ -117,15 +117,13 @@ public class MainActivity extends BaseActivity<HotKeyWordPresenter> implements H
         Log.e(TAG, "showMessage: " + message);
     }
     @Override
-    public  void showLoading() {
-
-        LoadingDialogManager.getInstance().showLoading(getSupportFragmentManager());
-
+    public void showLoading() {
+        LoadingDialogUtil.showLoading(getSupportFragmentManager());
     }
 
     @Override
-    public  void hideLoading() {
-        LoadingDialogManager.getInstance().hideLoading();
+    public void hideLoading() {
+        LoadingDialogUtil.hideLoading(getSupportFragmentManager());
     }
 
 }
