@@ -19,6 +19,7 @@
             app:tabIndicatorColor="@color/green"
             app:tabBackground="@color/cyan"
             app:tabTextAppearance="@android:style/TextAppearance.Holo.Large"
+            app:tabIndicatorFullWidth="false"
             />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_people"
+        android:title="PEOPLE"
+        android:icon="@drawable/selector_tab_people"
+        />
+    <item
+        android:id="@+id/tab_manage"
+        android:title="MANAGE"
+        android:icon="@drawable/selector_tab_manage"
+        />
+    <item
+        android:id="@+id/tab_picture"
+        android:title="PICTURE"
+        android:icon="@drawable/selector_tab_picture"
+        />
+</menu>
