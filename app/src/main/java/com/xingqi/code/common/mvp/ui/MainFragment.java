@@ -55,6 +55,8 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     Button btnTabLayout;
     @BindView(R.id.btn_drawer_layout_navigation)
     Button btnDrawerLayoutNavigation;
+    @BindView(R.id.btn_fab)
+    Button btnFab;
 
     @Override
     public int getLayoutId() {
@@ -183,5 +185,10 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.btn_drawer_layout_navigation)
     public void jumpToDrawerLayout() {
         CommonUtils.startActivityWithTransition(DrawerNavActivity.class);
+    }
+
+    @OnClick(R.id.btn_fab)
+    public void jumpToFloatActionButton() {
+        CommonUtils.startActivityWithTransition(FloatActionBtnActivity.class);
     }
 }
