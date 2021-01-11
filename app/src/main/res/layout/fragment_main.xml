@@ -104,6 +104,13 @@
                 android:layout_height="wrap_content"
                 android:text="Bottom Navigation View"
                 />
+
+            <Button
+                android:id="@+id/btn_palette"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转调色板"
+                />
         </LinearLayout>
 
     </ScrollView>

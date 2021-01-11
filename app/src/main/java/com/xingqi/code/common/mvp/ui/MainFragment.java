@@ -59,6 +59,8 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     Button btnFab;
     @BindView(R.id.bottom_navigation_view)
     Button bottomNavigationView;
+    @BindView(R.id.btn_palette)
+    Button btnPalette;
 
     @Override
     public int getLayoutId() {
@@ -197,5 +199,10 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.bottom_navigation_view)
     public void jumpToBottomNavigation() {
         CommonUtils.startActivityWithTransition(BottomNavigationActivity.class);
+    }
+
+    @OnClick(R.id.btn_palette)
+    public void onJumpToPalette() {
+        CommonUtils.startActivityWithTransition(PaletteActivity.class);
     }
 }
