@@ -65,4 +65,6 @@ dependencies {
 
     api 'com.google.android.material:material:1.2.0'
 
+    api 'com.miguelcatalan:materialsearchview:1.4.0'
+
 }

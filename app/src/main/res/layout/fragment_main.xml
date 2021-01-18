@@ -111,6 +111,12 @@
                 android:layout_height="wrap_content"
                 android:text="跳转调色板"
                 />
+
+            <Button
+                android:id="@+id/btn_material_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MaterialSearchView"/>
         </LinearLayout>
 
     </ScrollView>

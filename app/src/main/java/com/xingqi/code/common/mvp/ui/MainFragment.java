@@ -61,6 +61,8 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     Button bottomNavigationView;
     @BindView(R.id.btn_palette)
     Button btnPalette;
+    @BindView(R.id.btn_material_search_view)
+    Button btnMaterialSearchView;
 
     @Override
     public int getLayoutId() {
@@ -204,5 +206,10 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
     @OnClick(R.id.btn_palette)
     public void onJumpToPalette() {
         CommonUtils.startActivityWithTransition(PaletteActivity.class);
+    }
+
+    @OnClick(R.id.btn_material_search_view)
+    public void onJumpToMaterialSearchView() {
+        CommonUtils.startActivityWithTransition(MaterialSearchViewSimpleActivity.class);
     }
 }

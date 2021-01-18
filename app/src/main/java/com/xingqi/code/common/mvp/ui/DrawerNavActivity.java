@@ -35,6 +35,15 @@ public class DrawerNavActivity extends BaseActivity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isOpen()){
+            drawerLayout.close();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
 
     @Override
     public int getLayoutId() {
