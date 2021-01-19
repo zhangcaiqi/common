@@ -78,6 +78,20 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(),container,false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPresenter = initPresenter();
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         if(isSetAppBarStyle()){
             Activity activity = getActivity();
             if(activity instanceof AppCompatActivity){
@@ -89,14 +103,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
                 setHasOptionsMenu(hasOptionMenu);
             }
         }
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mPresenter = initPresenter();
-
     }
 
     protected abstract P initPresenter();
