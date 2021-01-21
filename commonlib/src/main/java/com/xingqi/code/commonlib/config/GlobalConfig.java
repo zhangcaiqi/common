@@ -9,7 +9,7 @@ import java.io.File;
 import okhttp3.OkHttpClient;
 
 public class GlobalConfig {
-    public static final int TIME_OUT = 10;
+    public static final int TIME_OUT = 30;
     private GlobalConfig(Builder builder){
         this.application = builder.application;
         this.cacheDir = builder.cacheDir;
