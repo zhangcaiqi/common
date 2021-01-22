@@ -92,6 +92,12 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onStart() {
         super.onStart();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if(isSetAppBarStyle()){
             Activity activity = getActivity();
             if(activity instanceof AppCompatActivity){
