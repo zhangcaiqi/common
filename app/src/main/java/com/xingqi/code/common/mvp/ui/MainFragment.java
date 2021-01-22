@@ -77,8 +77,8 @@ public class MainFragment extends BaseFragment<HotKeyWordPresenter> implements H
 
     @Override
     public void initData() {
-        Toolbar toolbar = getToolbar();
-        toolbar.setNavigationIcon(null);
+//        Toolbar toolbar = getToolbar();
+//        toolbar.setNavigationIcon(null);
         mPresenter.getHotWordList();
     }
 

@@ -33,6 +33,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     protected P mPresenter;
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Toolbar toolbar;
+    private View view;
     public static <T extends BaseFragment> T getInstance(Bundle bundle,Class<T> fragmentClass){
         try {
             T t = fragmentClass.newInstance();
@@ -77,7 +78,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(),container,false);
+        view = inflater.inflate(getLayoutId(),container,false);
 
         return view;
     }
@@ -95,7 +96,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         if(isSetAppBarStyle()){
             Activity activity = getActivity();
             if(activity instanceof AppCompatActivity){
-                toolbar = ToolbarUtil.initToolbar(this.getClass(), (AppCompatActivity) activity);
+                toolbar = ToolbarUtil.initFragmentToolbar(this.getClass(), (AppCompatActivity) activity,view);
             }
             ToolbarConfig toolbarConfig = ToolbarUtil.getToolbarConfig(this.getClass());
             if(null != toolbarConfig){

@@ -1,5 +1,7 @@
 package com.xingqi.code.commonlib.utils;
 
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -12,6 +14,22 @@ public class ToolbarUtil {
         ToolbarConfig toolbarConfig = getToolbarConfig(clazz);
         if(null != toolbarConfig){
             Toolbar toolbar = activity.findViewById(R.id.toolbar);
+            if(null != toolbar){
+                toolbar.setTitle(toolbarConfig.title());
+                activity.setSupportActionBar(toolbar);
+                activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                toolbar.setOnMenuItemClickListener((Toolbar.OnMenuItemClickListener) activity);
+                return toolbar;
+            }
+
+        }
+        return null;
+    }
+
+    public static Toolbar initFragmentToolbar(Class<?> clazz, AppCompatActivity activity, View view){
+        ToolbarConfig toolbarConfig = getToolbarConfig(clazz);
+        if(null != toolbarConfig){
+            Toolbar toolbar = view.findViewById(R.id.toolbar);
             if(null != toolbar){
                 toolbar.setTitle(toolbarConfig.title());
                 activity.setSupportActionBar(toolbar);
