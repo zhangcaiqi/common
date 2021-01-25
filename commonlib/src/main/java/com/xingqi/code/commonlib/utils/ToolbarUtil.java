@@ -33,7 +33,7 @@ public class ToolbarUtil {
             if(null != toolbar){
                 toolbar.setTitle(toolbarConfig.title());
                 activity.setSupportActionBar(toolbar);
-                activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//                activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 toolbar.setOnMenuItemClickListener((Toolbar.OnMenuItemClickListener) activity);
                 return toolbar;
             }
