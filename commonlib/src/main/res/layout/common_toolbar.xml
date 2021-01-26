@@ -9,4 +9,5 @@
     app:theme="@style/ToolbarTheme"
     android:background="@color/colorPrimary"
     app:layout_scrollFlags="scroll|enterAlways"
+    app:layout_collapseMode="pin"
    />
